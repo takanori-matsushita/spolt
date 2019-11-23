@@ -1,0 +1,410 @@
+<%
+@sponcers = Sponcer.all.order(id: "asc")
+@setting = Setting.first
+@events = Event.all
+@generations = Generation.all
+@area1 = Pref.all.where(area_id: 1)
+@area2 = Pref.all.where(area_id: 2)
+@area3 = Pref.all.where(area_id: 3)
+@area4 = Pref.all.where(area_id: 4)
+@area5 = Pref.all.where(area_id: 5)
+@area6 = Pref.all.where(area_id: 6)
+@area7 = Pref.all.where(area_id: 7)
+@cat_news = Newscategory.all.order(id: "asc")
+@pages = Page.all.order(id: "asc")
+path = request.path
+%>
+<!-- Footer -->
+<footer class="page-footer font-small">
+  <div class="col-12 py-4 text-center morpheus-den-gradient">
+    <!-- Content -->
+    <h2 class="text-uppercase mb-3 under-line">スポンサー</h2>
+    <hr class="clearfix w-100 pb-3">
+    <!-- Footer Elements -->
+    <div class="container-fluid">
+    <div class="d-none d-lg-flex justify-content-center flex-wrap">
+    <% @sponcers.each do |sponcer| %>
+      <div style="max-width:16.66667%;" class="view overlay z-depth-1-half mx-2 mb-4">
+        <img src="/images/<%= sponcer.image %>" class="img-fluid" alt="<%= sponcer.title %>">
+        <a href="<%= sponcer.url %>" target="_blank">
+          <div class="mask rgba-white-light"></div>
+        </a>
+      </div>
+      <% end %>
+    </div>
+    <div class="d-none d-lg-none d-sm-flex justify-content-center flex-wrap">
+    <% @sponcers.each do |sponcer| %>
+      <div style="max-width:25%;" class="view overlay z-depth-1-half mx-2 mb-4">
+        <img src="/images/<%= sponcer.image %>" class="img-fluid" alt="<%= sponcer.title %>">
+        <a href="<%= sponcer.url %>" target="_blank">
+          <div class="mask rgba-white-light"></div>
+        </a>
+      </div>
+      <% end %>
+    </div>
+    <div class="d-flex d-sm-none justify-content-center flex-wrap">
+    <% @sponcers.each do |sponcer| %>
+      <div style="max-width:40%;" class="view overlay z-depth-1-half mx-2 mb-4">
+        <img src="/images/<%= sponcer.image %>" class="img-fluid" alt="<%= sponcer.title %>">
+        <a href="<%= sponcer.url %>" target="_blank">
+          <div class="mask rgba-white-light"></div>
+        </a>
+      </div>
+      <% end %>
+    </div>
+    </div>
+    <!-- Footer Elements -->
+    <hr class="clearfix w-100">
+    <a href="/sponcered">スポンサーについて</a>
+  </div>
+  
+  <!-- Footer Links -->
+  <div class="blue-gradient">
+    <div class="container-fluid text-center text-md-left">
+      <!-- Grid row -->
+      <div class="row">
+        
+        <div class="container pt-5">
+          <div class="row">
+            
+            <!-- Grid column -->
+            <div class="col-md-6 mt-md-0 mt-3">
+              
+              <!-- Content -->
+              <a href="/"><img src="/images/top/<%= @setting.logo %>" alt="footer-logo"></a>
+              <p class="mt-3">すぽるとでは、日本国内のあらゆるスポーツの情報を掲載しております。</p>
+              
+            </div>
+            <!-- Grid column -->
+            
+            <hr class="clearfix w-100 d-md-none pb-3">
+            
+            <!-- Grid column -->
+            <div class="col-4 col-md-2 mb-md-0 mb-3">
+              
+              <!-- Links -->
+              <h2 style="font-size: 1.25rem;" class="text-uppercase"><a href="/compe-info">大会情報</a></h2>
+              
+              <ul class="list-unstyled footer-list">
+                <li>
+                  <a href="/cat-event-info">競技一覧</a>
+                </li>
+                <li>
+                  <a href="cat-pref-info">地域一覧</a>
+                </li>
+                <li>
+                  <a href="cat-generation-info">年代別一覧</a>
+                </li>
+              </ul>
+              
+            </div>
+            <!-- Grid column -->
+            
+            <!-- Grid column -->
+            <div class="col-4 col-md-2 mb-md-0 mb-3">
+              
+              <!-- Links -->
+              <h2 style="font-size: 1.25rem;" class="text-uppercase"><a href="/compe-result">大会結果</a></h2>
+              
+              <ul class="list-unstyled footer-list">
+                <li>
+                  <a href="/cat-event-result">競技一覧</a>
+                </li>
+                <li>
+                  <a href="cat-pref-result">地域一覧</a>
+                </li>
+                <li>
+                  <a href="cat-generation-result">年代別一覧</a>
+                </li>
+              </ul>
+              
+            </div>
+            <!-- Grid column -->
+            <!-- Grid column -->
+            <div class="col-4 col-md-2 mb-md-0 mb-3">
+              
+              <!-- Links -->
+              <h2 style="font-size: 1.25rem;" class="text-uppercase"><a href="/news">ニュース</a></h2>
+              
+              <ul class="list-unstyled footer-list">
+              <% @cat_news.each do |cat| %>
+                <li>
+                  <a href="/news/<%= cat.slug %>"><%= cat.name %></a>
+                </li>
+              <% end %>
+              </ul>
+            </div>
+            <!-- Grid column -->
+          </div>
+          <!-- Grid row -->
+          <ul class="nav justify-content-center pb-3">
+            <% @pages.each do |page| %>
+            <li class="nav-item">
+              <a class="nav-link active" href="/<%= page.permalink %>"><%= page.title %></a>
+            </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+      <!-- Grid row -->
+    </div>
+    <!-- Footer Links -->
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2018 Copyright:
+      <a href="/">spolt</a>
+    </div>
+    <!-- Copyright -->
+  </div>
+</footer>
+<!-- Footer -->
+<!-- refine button -->
+<a style="display:none;" class="btn-floating btn-lg btn-success waves-effect waves-light white-text refine" data-toggle="modal" data-target="#modal-refine"><i class="fas fa-search"></i></a>
+<!--Modal-->
+<div class="modal fade show" id="modal-refine" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-modal="true">
+  <div class="modal-dialog modal-fluid modal-notify modal-success" role="document">
+    <!--Content-->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <p class="heading lead">条件を絞り込む</p>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" class="white-text">×</span>
+        </button>
+      </div>
+      <!--Body-->
+      <div class="container mb-3">
+        <div class="row">
+        <div class="col-12">
+            <h3 class="mt-5 twotone">キーワードから絞り込む</h3>
+            <form action="/search" method="get">
+            <div class="input-group md-form form-sm form-2 pl-0">
+              <input class="form-control my-0 py-1 amber-border" type="text" name="q" placeholder="Search" aria-label="Search">
+              <div class="input-group-append">
+                <button type="submit" class="input-group-text amber lighten-3" id="basic-text1"><i class="fas fa-search text-grey"
+                  aria-hidden="true"></i></button>
+                </div>
+              </div>
+              </form>
+            </div>
+            <div class="col-12">
+              <h3 class="mt-5 twotone">地域から絞り込む</h3>
+              <div class="col-12">
+              <form action="/refine" method="get">
+                <dl>
+                  <dt>北海道・東北</dt>
+                  <dd>
+                    <!--<div class="custom-control custom-checkbox custom-control-inline">
+                      <input type="checkbox" class="custom-control-input" id="area01">
+                      <label class="custom-control-label" for="area01">すべて選択する</label>
+                    </div>-->
+                    <% @area1.each do |area| %>
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                      <input type="checkbox" class="custom-control-input" name="pref_id[]" value="<%= area.id %>" id="<%= area.slug %>">
+                      <label class="custom-control-label" for="<%= area.slug %>"><%= area.name %></label>
+                    </div>
+                    <% end %>
+                  </dd>
+                </dl>
+              </div>
+              <hr class="clearfix w-100">
+              <div class="col-12">
+                <dl>
+                  <dt>関東</dt>
+                  <dd>
+                  <% @area2.each do |area| %>
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                      <input type="checkbox" class="custom-control-input" name="pref_id[]" value="<%= area.id %>" id="<%= area.slug %>">
+                      <label class="custom-control-label" for="<%= area.slug %>"><%= area.name %></label>
+                    </div>
+                    <% end %>
+                  </dd>
+                </dl>
+              </div>
+              <hr class="clearfix w-100">
+              <div class="col-12">
+                <dl>
+                  <dt>中部</dt>
+                  <dd>
+                  <% @area3.each do |area| %>
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                      <input type="checkbox" class="custom-control-input" name="pref_id[]" value="<%= area.id %>" id="<%= area.slug %>">
+                      <label class="custom-control-label" for="<%= area.slug %>"><%= area.name %></label>
+                    </div>
+                    <% end %>
+                  </dd>
+                </dl>
+              </div>
+              <hr class="clearfix w-100">
+              <div class="col-12">
+                <dl>
+                  <dt>近畿</dt>
+                  <dd>
+                  <% @area4.each do |area| %>
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                      <input type="checkbox" class="custom-control-input" name="pref_id[]" value="<%= area.id %>" id="<%= area.slug %>">
+                      <label class="custom-control-label" for="<%= area.slug %>"><%= area.name %></label>
+                    </div>
+                  <% end %>
+                  </dd>
+                </dl>
+              </div>
+              <hr class="clearfix w-100">
+              <div class="col-12">
+                <dl>
+                  <dt>中国</dt>
+                  <dd>
+                  <% @area5.each do |area| %>
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                      <input type="checkbox" class="custom-control-input" name="pref_id[]" value="<%= area.id %>" id="<%= area.slug %>">
+                      <label class="custom-control-label" for="<%= area.slug %>"><%= area.name %></label>
+                    </div>
+                    <% end %>
+                  </dd>
+                </dl>
+              </div>
+              <hr class="clearfix w-100">
+              <div class="col-12">
+                <dl>
+                  <dt>四国</dt>
+                  <dd>
+                  <% @area6.each do |area| %>
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                      <input type="checkbox" class="custom-control-input" name="pref_id[]" value="<%= area.id %>" id="<%= area.slug %>">
+                      <label class="custom-control-label" for="<%= area.slug %>"><%= area.name %></label>
+                    </div>
+                    <% end %>
+                  </dd>
+                </dl>
+              </div>
+              <hr class="clearfix w-100">
+              <div class="col-12">
+                <dl>
+                  <dt>九州・沖縄</dt>
+                  <dd>
+                  <% @area7.each do |area| %>
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                      <input type="checkbox" class="custom-control-input" name="pref_id[]" value="<%= area.id %>" id="<%= area.slug %>">
+                      <label class="custom-control-label" for="<%= area.slug %>"><%= area.name %></label>
+                    </div>
+                    <% end %>
+                  </dd>
+                </dl>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <h3 class="mt-5 twotone">種目から絞り込む</h3>
+              <% @events.each do |event| %>
+              <div class="custom-control custom-checkbox custom-control-inline">
+                <input type="checkbox" name="event_id[]" class="custom-control-input" value="<%= event.id %>" id="<%= event.slug %>">
+                <label class="custom-control-label" for="<%= event.slug %>"><%= event.name %></label>
+              </div>
+              <% end %>
+            </div>
+            <div class="col-lg-6">
+              <h3 class="mt-5 twotone">年代から絞り込む</h3>
+              <% @generations.each do |generation| %>
+              <div class="custom-control custom-checkbox custom-control-inline">
+                <input type="checkbox" name="generation_id[]" class="custom-control-input" value="<%= generation.id %>" id="<%= generation.slug %>">
+                <label class="custom-control-label" for="<%= generation.slug %>"><%= generation.name %></label>
+              </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+          <!--Footer-->
+        <!-- refine modal -->
+        <div class="modal-footer justify-content-center">
+          <a class="btn blue-gradient btn-lg waves-effect waves-light d-block" href="">条件を絞り込む</a>
+          <a class="btn red lighten-1 btn-lg waves-effect waves-light d-block" data-dismiss="modal" aria-label="Close">閉じる</a>
+        </div>
+      </div>
+      <!--/.Content-->
+    </div>
+  </div>
+  <!--/.Modal-->
+  <% if path == "/compe-result/#{params['id']}" %>
+  <!-- table of contents -->
+  <a style="display: none;" class="btn-floating btn-lg btn-info waves-effect waves-light white-text toclist" data-toggle="modal" data-target="#toc">
+      <i class="fas fa-list"></i>
+  </a>
+<!-- Full Height Modal Right -->
+<div class="modal fade right" id="toc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+aria-hidden="true" style="z-index:9999;">
+<!-- Add class .modal-full-height and then add class .modal-right (or other classes from list above) to set a position to the modal -->
+<div class="modal-dialog modal-full-height modal-right" role="document">
+<div class="modal-content">
+<div class="modal-header bg-info white-text">
+  <h4 class="modal-title w-100" id="myModalLabel">目次</h4>
+  <button type="button" class="close white-text" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+    <nav class="toc js-toc soft-double transition--300 position--absolute"></nav>
+</div>
+<div class="modal-footer justify-content-center">
+  <button type="button" class="btn red lighten-3 white-text" data-dismiss="modal">閉じる</button>
+</div>
+</div>
+</div>
+</div>
+<% end %>
+<!-- sns -->
+<div class="sns">
+  <span class="v-text">SNS</span>
+  <!-- Facebook -->
+  <div class="facebook mb-3"><a href="https://www.facebook.com/<%= @setting.fb_account %>" target="_blank"><i class="fab fa-facebook-f fa-2x"></i></a></div>
+  <!-- Twitter -->
+  <div class="twitter"><a href="https://twitter.com/<%= @setting.tw_account %>" target="_blank"><i class="fab fa-twitter fa-2x"></i></a></div>
+</div>
+
+<!-- Full Height Modal Right -->
+  <!-- scrolltop -->
+  <div class="scrolltop">
+    <a href="#"><i class="fas fa-chevron-circle-up fa-4x"></i></a>
+  </div>
+  <!-- JQuery -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/js/mdb.min.js"></script>
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+  <script type="text/javascript" src="/js/main.js"></script>
+  <!-- 目次自動表示(table of contents) -->
+  <script>
+  (function(){
+  "use strict;"
+  tocbot.init({
+  tocSelector: '.js-toc',
+  contentSelector: '.js-toc-content',
+  headingSelector: 'h1, h2, h3',
+  collapseDepth: 3,
+  });
+})();
+  </script>
+  <!-- メールフォームバリデーション設定 -->
+  <script>
+  (function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+  </script>
+</body>
+</html>

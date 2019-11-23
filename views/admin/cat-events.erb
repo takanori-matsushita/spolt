@@ -1,0 +1,75 @@
+<%= erb :'admin/login-header' %>
+<div class="container-fluid">
+<div class="row">
+<%= erb :'admin/login-sidebar' %>
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h2">競技種目カテゴリ</h1>
+    </div>
+    <p>競技種目カテゴリです。</p>
+    <% if @event.errors.present? %>
+      <%= erb :'admin/validates-error' %>
+    <% end %>
+      <div class="row">
+        <div class="col-md-4">
+        <h3>新規追加</h3>
+          <form action="/adm-spolt/events-new" method="post" enctype="multipart/form-data">
+            <label for="name">名前</label>
+            <% if @event.errors.messages[:name].present? %>
+              <span class="text-danger pl-3"><%= @event.errors.messages[:name].to_s.delete('["]') %></span>
+            <% end %>
+            <input value="<%= @event.name %>" type="text" name="name" id="name" class="form-control mb-3
+            <% if @event.errors.messages[:name].present? %>
+              is-invalid
+            <% end %>
+            ">
+            <label for="slug">スラッグ</label>
+            <% if @event.errors.messages[:slug].present? %>
+              <span class="text-danger pl-3"><%= @event.errors.messages[:slug].to_s.delete('["]') %></span>
+            <% end %>
+            <input value="<%= @event.slug %>" type="text" name="slug" id="slug" class="form-control mb-3
+            <% if @event.errors.messages[:slug].present? %>
+              is-invalid
+            <% end %>
+            ">
+            <label for="image">画像</label>
+            <div class="mb-3">
+            <input type="file" class="dropify" name="img">
+            </div>
+            <div class="text-center">
+              <button class="btn m-0 bg-success text-center white-text" type="submit">新規種目を追加</button>
+            </div>
+            </form>
+        </div>
+        <div class="col-md-8">
+        <h3>カテゴリ一覧</h3>
+          <table class="table table-striped">
+            <thead>
+            <tr class="bg-info">
+              <th style="width:10px;"><input type="checkbox" name="allchecked"></th>
+              <th class="font-weight-bold">名前</th>
+              <th class="font-weight-bold">ID</th>
+              <th class="font-weight-bold">スラッグ</th>
+              <th style="width:70px;"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @events.each do |event| %>
+            <tr>
+              <td><input type="checkbox" name="<%= event.id %>"></td>
+              <td><a class="text-primary" href="/adm-spolt/event-edit/<%= event.id %>"><%= event.name %></a></td>
+              <td><%= event.id %></td>
+              <td><%= event.slug %></td>
+              <td><a class="text-danger" href="/adm-spolt/event-destroy/<%= event.id %>" onClick="return confirm('カテゴリ：【<%= event.name %>】を削除します。\nよろしいですか？');">削除</a></td>
+            </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+  </main>
+</div>
+</div>
+<% if @notice %>
+  <%= erb :'admin/flash-modal' %>
+<% end %>

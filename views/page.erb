@@ -1,0 +1,27 @@
+<%= erb :'parts/breadclumb' %>
+<!-- jumbotron -->
+<div 
+<% if @page.image.nil? %>
+<% else %>
+style="background-image: url(/images/<%= @page.image %>);"
+<% end %>
+class="jumbotron card card-image bg-jumbotron">
+  <div class="text-white text-center py-5 px-4 jumbotron-title">
+    <div>
+      <h1 class="card-title h1-responsive font-bold under-line"><strong><%= h @page.title %></strong></h1>
+      <p><%= h @page.disc %></p>
+    </div>
+  </div>
+</div>
+</header>
+<div class="main-wrapper py-5 grey lighten-5">
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+    <h2 class="twotone mb-5"><%= h @page.title %></h2>
+    <%= @page.content %>
+    </div>
+<%= erb :'parts/sidebar' %>
+  </div>
+</div>
+</div>

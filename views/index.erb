@@ -1,0 +1,414 @@
+<!--Carousel Wrapper-->
+  <div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel">
+    <!--Indicators-->
+    <ol class="carousel-indicators">
+      <% num = 1 %>
+      <% @sliders.each_with_index do |slider, i| %>
+      <li data-target="#carousel-example-1z" data-slide-to="<%= num %>"
+        <% if i == 0 %>
+        class="active"
+        <% end %>
+      </li>>
+      <% num += 1 %>
+      <% end %>
+    </ol>
+    <!--/.Indicators-->
+    <!--Slides-->
+    <div class="carousel-inner" role="listbox">
+      <% @sliders.each_with_index do |slider, i| %>
+      <div class="carousel-item
+      <% if i == 0 %>
+      active
+      <% end %>
+      ">
+        <div class="view">
+          <img class="d-block w-100" src="/images/<%= slider.image %>"
+          alt="First slide">
+          <div class="mask pattern-7"></div>
+          <div class="carousel-caption">
+            <h2 class="h2-responsive"><%= slider.title %></h2>
+            <p><%= slider.content %></p>
+            <a class="btn btn-info btn-lg" href="<%= slider.url %>" target="_blank">詳細</a>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+    <!--/.Slides-->
+    <!--Controls-->
+    <a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carousel-example-1z" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+    <!--/.Controls-->
+  </div>
+  <!--/.Carousel Wrapper-->
+  <section id="top-compe-info" class="py-5">
+    <div class="container">
+      <h2 class="text-center top-section-title mb-4">大会情報</h2>
+    </div>
+    <div class="d-none d-md-block">
+      <div class="row slick-result">
+      <% @c_infos.each do |compe| %>
+        <div class="slide-contents">
+          <div class=" mt-4 white border border-light rounded">
+            <div class="compe-date bg-info text-white rounded d-block py-2">
+              <div class="row">
+                <div class="col-6 text-center">大会日:<%= compe.compe_date %></div>
+                <div class="col-6 text-center">掲載日:<%= compe.created_at %></div>
+              </div>
+            </div>
+            <div class="media d-block d-md-flex p-3">
+              <div class="overlay zoom">
+                <a href="/compe-info/<%= compe.id %>">
+                  <img style="width:200px; height:133px; object-fit:cover;" class="d-flex mb-3 mx-auto media-image z-depth-1 img-fluid"
+                  <% if compe.event.image.nil? %>
+                  src="/images/origin/no-img.png"
+                  <% else %>
+                  src="/images/<%= compe.event.image %>"
+                  <% end %>
+                  alt="<%= compe.event.slug %>">
+                </a>
+                <a class="btn btn-info waves-effect waves-light d-block" href="/compe-info/<%= compe.id %>">詳細を見る</a>
+              </div>
+              <div class="media-body text-center text-md-left ml-md-3 ml-0">
+                <div class="chip bg-primary text-white"><%= compe.event.name %></div>
+                <div class="chip bg-info text-white"><%= compe.pref.name %></div>
+                <div class="chip bg-warning text-white"><%= compe.generation.name %></div>
+                <h5 class="mt-0 font-weight-bold"><a href="/compe-info/<%= compe.id %>"><%= compe.title %></a></h5>
+                <p><%= compe.excerpt %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      </div>
+    </div>
+    <div class="d-md-none">
+      <div class="slide-wrap">
+        <% @c_infos.each do |compe| %>
+        <div class="slide-contents">
+          <div class=" mt-4 white border border-light rounded">
+            <div class="compe-date bg-info text-white rounded d-block py-2">
+              <div class="row">
+                <div class="col-6 text-center">大会日時:<%= compe.compe_date %></div>
+                <div class="col-6 text-center">更新日時:<%= compe.updated_at %></div>
+              </div>
+            </div>
+            <div class="media d-block d-md-flex p-3">
+              <div class="overlay zoom">
+                <a href="/compe-info/<%= compe.id %>">
+                  <img style="width:200px; height:133px; object-fit:cover;" class="d-flex mb-3 mx-auto media-image z-depth-1 img-fluid"
+                  <% if compe.event.image.nil? %>
+                  src="/images/origin/no-img.png"
+                  <% else %>
+                  src="/images/<%= compe.event.image %>"
+                  <% end %>
+                  alt="<%= compe.event.slug %>">
+                </a>
+              </div>
+              <div class="media-body text-center text-md-left ml-md-3 ml-0">
+                <div class="chip bg-primary text-white"><%= compe.event.name %></div>
+                <div class="chip bg-info text-white"><%= compe.pref.name %></div>
+                <div class="chip bg-warning text-white"><%= compe.generation.name %></div>
+                <h5 class="mt-0 font-weight-bold"><a href="/compe-info/<%= compe.id %>"><%= compe.title %></a></h5>
+                <p><%= compe.excerpt %></p>
+                <a class="btn btn-info waves-effect waves-light d-block" href="/compe-info/<%= compe.id %>">詳細を見る</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="container">
+      <a class="btn purple-gradient btn-lg waves-effect waves-light mt-5 d-block" href="/compe-info">大会情報一覧</a>
+    </div>
+  </section>
+  <section id="top-compe-result" class="py-5 red lighten-4">
+    <div class="container">
+      <h2 class="text-center top-section-title mb-4">大会結果</h2>
+    </div>
+    <div class="d-none d-md-block">
+      <div  class="row slick-result">
+      <% @c_results.each do |result| %>
+        <div class="slide-contents">
+          <div class=" mt-4 white rounded">
+            <div class="compe-date red accent-2 text-white rounded d-block py-2">
+              <div class="row">
+                <div class="col-6 text-center">大会日:<%= result.compe_date %></div>
+                <div class="col-6 text-center">最終更新日:<%= result.updated_at %></div>
+              </div>
+            </div>
+            <div class="media d-block d-md-flex p-3">
+              <div class="overlay zoom">
+                <a href="/compe-result/<%= result.id %>">
+                  <img style="width:200px; height:133px; object-fit:cover;" class="d-flex mb-3 mx-auto media-image z-depth-1 img-fluid"
+                  <% if result.event.image.nil? %>
+                  src="/images/origin/no-img.png"
+                  <% else %>
+                  src="/images/<%= result.event.image %>"
+                  <% end %>
+                  alt="<%= result.event.slug %>">
+                </a>
+                <a class="btn btn-danger waves-effect waves-light d-block" href="/compe-result/<%= result.id %>">詳細を見る</a>
+              </div>
+              <div class="media-body text-center text-md-left ml-md-3 ml-0">
+                <div class="chip bg-primary text-white"><%= result.event.name %></div>
+                <div class="chip bg-info text-white"><%= result.pref.name %></div>
+                <div class="chip bg-warning text-white"><%= result.generation.name %></div>
+                <h5 class="mt-0 font-weight-bold"><a href="/compe-result/<%= result.id %>"><%= result.title %></a></h5>
+                <p><%= result.excerpt %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="d-md-none">
+      <div class="slide-wrap">
+      <% @c_results.each do |result| %>
+        <div class="slide-contents">
+          <div class=" mt-4 white rounded">
+            <div class="compe-date red accent-2 text-white rounded d-block py-2">
+              <div class="row">
+                <div class="col-6 text-center">大会日:<%= result.compe_date %></div>
+                <div class="col-6 text-center">最終更新日:<%= result.updated_at %></div>
+              </div>
+            </div>
+            <div class="media d-block d-md-flex p-3">
+              <div class="overlay zoom">
+                <a href="/compe-result/<%= result.id %>">
+                  <img style="width:200px; height:133px; object-fit:cover;" class="d-flex mb-3 mx-auto media-image z-depth-1 img-fluid" 
+                  <% if result.event.image.nil? %>
+                  src="/images/origin/no-img.png"
+                  <% else %>
+                  src="/images/<%= result.event.image %>"
+                  <% end %>
+                  alt="<%= result.event.slug %>">
+                </a>
+              </div>
+              <div class="media-body text-center text-md-left ml-md-3 ml-0">
+                <div class="chip bg-primary text-white"><%= result.event.name %></div>
+                <div class="chip bg-info text-white"><%= result.pref.name %></div>
+                <div class="chip bg-warning text-white"><%= result.generation.name %></div>
+                <h5 class="mt-0 font-weight-bold"><a href="/compe-result/<%= result.id %>"><%= result.title %></a></h5>
+                <p><%= result.excerpt %></p>
+                <a class="btn btn-danger waves-effect waves-light d-block" href="/compe-result/<%= result.id %>">詳細を見る</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="container">
+      <a class="btn peach-gradient btn-lg waves-effect waves-light mt-5 d-block" href="/compe-result">大会結果一覧</a>
+    </div>
+  </section>
+  <section id="top-refine" class="py-5">
+    <div class="container">
+      <h2 class="text-center top-section-title mb-4">絞り込み</h2>
+      <p class="text-center">絞り込みたい条件を選択して検索できます。複数の条件指定も可能です。</p>
+      <div class="row">
+        <div class="col-12">
+          <h3 class="mt-5 twotone">キーワードから絞り込む</h3>
+          <form action="/search" method="get">
+          <div class="input-group md-form form-sm form-2 pl-0">
+            <input class="form-control my-0 py-1 amber-border" type="text" name="q" placeholder="Search" aria-label="Search">
+            <div class="input-group-append">
+              <button type="submit" class="input-group-text amber lighten-3" id="basic-text1"><i class="fas fa-search text-grey"
+                aria-hidden="true"></i></button>
+              </div>
+            </div>
+            </form>
+          </div>
+          <div class="col-12">
+            <h3 class="mt-5 twotone">地域から絞り込む</h3>
+            <div class="col-12">
+            <form action="/refine" method="get">
+              <dl>
+                <dt>北海道・東北</dt>
+                <dd>
+                  <!--<div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="checkbox" class="custom-control-input" id="area01">
+                    <label class="custom-control-label" for="area01">すべて選択する</label>
+                  </div>-->
+                  <% @area1.each do |area| %>
+                  <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="checkbox" class="custom-control-input" name="pref_id[]" value="<%= area.id %>" id="<%= area.slug %>">
+                    <label class="custom-control-label" for="<%= area.slug %>"><%= area.name %></label>
+                  </div>
+                  <% end %>
+                </dd>
+              </dl>
+            </div>
+            <hr class="clearfix w-100">
+            <div class="col-12">
+              <dl>
+                <dt>関東</dt>
+                <dd>
+                <% @area2.each do |area| %>
+                  <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="checkbox" class="custom-control-input" name="pref_id[]" value="<%= area.id %>" id="<%= area.slug %>">
+                    <label class="custom-control-label" for="<%= area.slug %>"><%= area.name %></label>
+                  </div>
+                  <% end %>
+                </dd>
+              </dl>
+            </div>
+            <hr class="clearfix w-100">
+            <div class="col-12">
+              <dl>
+                <dt>中部</dt>
+                <dd>
+                <% @area3.each do |area| %>
+                  <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="checkbox" class="custom-control-input" name="pref_id[]" value="<%= area.id %>" id="<%= area.slug %>">
+                    <label class="custom-control-label" for="<%= area.slug %>"><%= area.name %></label>
+                  </div>
+                  <% end %>
+                </dd>
+              </dl>
+            </div>
+            <hr class="clearfix w-100">
+            <div class="col-12">
+              <dl>
+                <dt>近畿</dt>
+                <dd>
+                <% @area4.each do |area| %>
+                  <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="checkbox" class="custom-control-input" name="pref_id[]" value="<%= area.id %>" id="<%= area.slug %>">
+                    <label class="custom-control-label" for="<%= area.slug %>"><%= area.name %></label>
+                  </div>
+                <% end %>
+                </dd>
+              </dl>
+            </div>
+            <hr class="clearfix w-100">
+            <div class="col-12">
+              <dl>
+                <dt>中国</dt>
+                <dd>
+                <% @area5.each do |area| %>
+                  <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="checkbox" class="custom-control-input" name="pref_id[]" value="<%= area.id %>" id="<%= area.slug %>">
+                    <label class="custom-control-label" for="<%= area.slug %>"><%= area.name %></label>
+                  </div>
+                  <% end %>
+                </dd>
+              </dl>
+            </div>
+            <hr class="clearfix w-100">
+            <div class="col-12">
+              <dl>
+                <dt>四国</dt>
+                <dd>
+                <% @area6.each do |area| %>
+                  <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="checkbox" class="custom-control-input" name="pref_id[]" value="<%= area.id %>" id="<%= area.slug %>">
+                    <label class="custom-control-label" for="<%= area.slug %>"><%= area.name %></label>
+                  </div>
+                  <% end %>
+                </dd>
+              </dl>
+            </div>
+            <hr class="clearfix w-100">
+            <div class="col-12">
+              <dl>
+                <dt>九州・沖縄</dt>
+                <dd>
+                <% @area7.each do |area| %>
+                  <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="checkbox" class="custom-control-input" name="pref_id[]" value="<%= area.id %>" id="<%= area.slug %>">
+                    <label class="custom-control-label" for="<%= area.slug %>"><%= area.name %></label>
+                  </div>
+                  <% end %>
+                </dd>
+              </dl>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <h3 class="mt-5 twotone">種目から絞り込む</h3>
+            <% @events.each do |event| %>
+            <div class="custom-control custom-checkbox custom-control-inline">
+              <input type="checkbox" name="event_id[]" class="custom-control-input" value="<%= event.id %>" id="<%= event.slug %>">
+              <label class="custom-control-label" for="<%= event.slug %>"><%= event.name %></label>
+            </div>
+            <% end %>
+          </div>
+          <div class="col-lg-6">
+            <h3 class="mt-5 twotone">年代から絞り込む</h3>
+            <% @generations.each do |generation| %>
+            <div class="custom-control custom-checkbox custom-control-inline">
+              <input type="checkbox" name="generation_id[]" class="custom-control-input" value="<%= generation.id %>" id="<%= generation.slug %>">
+              <label class="custom-control-label" for="<%= generation.slug %>"><%= generation.name %></label>
+            </div>
+            <% end %>
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn blue-gradient btn-lg waves-effect waves-light mt-5 btn-block">条件を絞り込む</button>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+    <section id="top-news" class="py-5 indigo lighten-5">
+      <div class="container">
+        <h2 class="text-center top-section-title mb-4">ニュース</h2>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="news-tab" data-toggle="tab" href="#news" role="tab" aria-controls="news"
+            aria-selected="false">新着情報</a>
+          </li>
+          <% @cat_news.each do |n| %>
+          <li class="nav-item">
+            <a class="nav-link" id="<%= n.slug %>-tab" data-toggle="tab" href="#<%= n.slug %>" role="tab" aria-controls="<%= n.slug %>"
+            aria-selected="false"><%= n.name %></a>
+          </li>
+          <% end %>
+        </ul>
+        <div class="container">
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="news" role="tabpanel" aria-labelledby="news-tab">
+              <dl class="row top-news">
+              <% @news.each do |n| %>
+                <dt class="col-md-3"><%= n.created_at %></dt>
+                <dd class="col-md-9"><a class="black-text d-block" href="/news/<%= n.newscategory.slug %>/<%= n.id %>"><span style="width:85px;" class="text-center d-inline-block news <%= n.newscategory.slug %>"><%= n.newscategory.name %></span><%= n.title %></a></dd>
+              <% end %>
+              </dl>
+            </div>
+            <div class="tab-pane fade" id="notice" role="tabpanel" aria-labelledby="notice-tab">
+              <dl class="row top-news">
+              <% @notice5.each do |n| %>
+                <dt class="col-md-3"><%= n.created_at %></dt>
+                <dd class="col-md-9"><a class="black-text d-block" href="/news/<%= n.newscategory.slug %>/<%= n.id %>"><span class="d-inline-block news <%= n.newscategory.slug %>"><%= n.newscategory.name %></span><%= n.title %></a></dd>
+              <% end %>
+              </dl>
+            </div>
+            <div class="tab-pane fade" id="release" role="tabpanel" aria-labelledby="release-tab">
+              <dl class="row top-news">
+              <% @release5.each do |n| %>
+                <dt class="col-md-3"><%= n.created_at %></dt>
+                <dd class="col-md-9"><a class="black-text d-block" href="/news/<%= n.newscategory.slug %>/<%= n.id %>"><span class="d-inline-block news <%= n.newscategory.slug %>"><%= n.newscategory.name %></span><%= n.title %></a></dd>
+              <% end %>
+              </dl>
+            </div>
+            <div class="tab-pane fade" id="topics" role="tabpanel" aria-labelledby="topics-tab">
+              <dl class="row top-news">
+              <% @topics5.each do |n| %>
+                <dt class="col-md-3"><%= n.created_at %></dt>
+                <dd class="col-md-9"><a class="black-text d-block" href="/news/<%= n.newscategory.slug %>/<%= n.id %>"><span class="d-inline-block news <%= n.newscategory.slug %>"><%= n.newscategory.name %></span><%= n.title %></a></dd>
+              <% end %>
+              </dl>
+            </div>
+          </div>
+        </div>
+        <a class="btn aqua-gradient btn-lg waves-effect waves-light mt-5 d-block" href="/news">ニュース一覧</a>
+      </div>
+    </section>

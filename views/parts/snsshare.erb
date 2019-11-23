@@ -1,0 +1,38 @@
+<div id="share" class="row">
+  <!-- Twitter -->
+  <div class="col-lg-2 col-md-4 col-6">
+  <div class="share share-twitter">
+    <a href="http://twitter.com/share?url=<%= request.url %>&text=<%= @compe.title %>" target="_blank"><i class="fab fa-twitter"></i><br>Twitter</a>
+  </div>
+  </div>
+  <!-- Facebook -->
+  <div class="col-lg-2 col-md-4 col-6">
+    <div class="share share-facebook">
+    <a href="https://www.facebook.com/dialog/share?app_id=<%= @setting.fb_app_id %>&display=popup&href=<%= request.url %>" target="_blank"><i class="fab fa-facebook-f"></i><br>Facebook</a>
+    </div>
+  </div>
+  <!-- Google+ -->
+  <div class="col-lg-2 col-md-4 col-6">
+    <div class="share share-google">
+    <a href="https://plus.google.com/share?url=<%= request.url %>&h1=ja" target="_blank"><i class="fab fa-google-plus-g"></i><br>Google+</a>
+    </div>
+  </div>
+  <!-- はてなブックマーク -->
+  <div class="col-lg-2 col-md-4 col-6">
+    <div class="share share-hatena">
+    <a href="https://b.hatena.ne.jp/entry/<%= request.url %>" target="_blank"><i class="fa-hatena"></i><br>はてブ</a>
+    </div>
+  </div>
+  <!-- Pocket -->
+  <div class="col-lg-2 col-md-4 col-6">
+    <div class="share share-pocket">
+    <a href="http://getpocket.com/edit?url=<%= request.url %>&title=<%= @compe.title %>" rel=”nofollow” target="_blank"><i class="fab fa-get-pocket"></i><br>Pocket</a>
+    </div>
+  </div>
+  <!-- LINE -->
+  <div class="col-lg-2 col-md-4 col-6">
+    <div class="share share-line">
+    <a href="https://social-plugins.line.me/lineit/share?url=<%= request.url %>"><i class="fab fa-line"></i><br>LINE</a>
+    </div>
+  </div>
+</div>

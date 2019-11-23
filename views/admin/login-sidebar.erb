@@ -1,0 +1,114 @@
+  <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+    <div class="sidebar-sticky sidehover">
+      <ul class="nav flex-column">
+      <% if @member.author_id == 1 %>
+        <li class="nav-item">
+          <a class="nav-link py-4" href="/adm-spolt/dashbord">
+            ダッシュボード <span class="sr-only">(現位置)</span>
+          </a>
+        </li>
+        <li class="nav-item drop">
+            <a class="nav-link py-4" href="/adm-spolt/pages">
+              固定ページ
+            </a>
+            <div class="dropdown-content">
+            <ul class="list-unstyled">
+              <li class="nav-link"><a class="py-4 d-block text-body" href="/adm-spolt/pages">固定ページ一覧</a></li>
+              <li class="nav-link"><a class="py-4 d-block text-body" href="/adm-spolt/page-new">新規追加</a></li>
+            </ul>
+            </div>
+          </li>
+        <li class="nav-item drop">
+          <a class="nav-link py-4" href="/adm-spolt/competition">
+            大会情報・結果
+          </a>
+            <div class="dropdown-content">
+            <ul class="list-unstyled">
+              <li class="nav-link"><a class="py-4 d-block text-body" href="/adm-spolt/competition">投稿一覧</a></li>
+              <li class="nav-link"><a class="py-4 d-block text-body" href="/adm-spolt/competition-new">新規追加</a></li>
+              <li class="nav-link"><a class="py-4 d-block text-body" href="/adm-spolt/cat-events">種目カテゴリ</a></li>
+              <li class="nav-link"><a class="py-4 d-block text-body" href="/adm-spolt/cat-prefs">地域カテゴリ</a></li>
+              <li class="nav-link"><a class="py-4 d-block text-body" href="/adm-spolt/cat-generations">年代カテゴリ</a></li>
+              <li class="nav-link"><a class="py-4 d-block text-body" href="/adm-spolt/competition-tags">タグ</a></li>
+            </ul>
+            </div>
+        </li>
+        <li class="nav-item drop">
+          <a class="nav-link py-4" href="/adm-spolt/news">
+            ニュース
+          </a>
+          <div class="dropdown-content">
+            <ul class="list-unstyled">
+              <li class="nav-link"><a class="py-4 d-block text-body" href="/adm-spolt/news">ニュース一覧</a></li>
+              <li class="nav-link"><a class="py-4 d-block text-body" href="/adm-spolt/news-new">新規追加</a></li>
+              <li class="nav-link"><a class="py-4 d-block text-body" href="/adm-spolt/cat-news">ニュースカテゴリ</a></li>
+            </ul>
+            </div>
+        </li>
+        <li class="nav-item drop">
+          <a class="nav-link py-4" href="/adm-spolt/top-slider">
+            <span data-feather="users"></span>
+            トップスライダー
+          </a>
+          <div class="dropdown-content">
+          <ul class="list-unstyled">
+            <li class="nav-link"><a class="py-4 d-block text-body" href="/adm-spolt/top-slider">スライダー一覧</a></li>
+            <li class="nav-link"><a class="py-4 d-block text-body" href="/adm-spolt/top-slider-new">新規追加</a></li>
+          </ul>
+          </div>
+        </li>
+        <li class="nav-item drop">
+          <a class="nav-link py-4" href="/adm-spolt/sponcers">
+            <span data-feather="bar-chart-2"></span>
+            スポンサー
+          </a>
+          <div class="dropdown-content">
+          <ul class="list-unstyled">
+            <li class="nav-link"><a class="py-4 d-block text-body" href="/adm-spolt/sponcers">スポンサー一覧</a></li>
+            <li class="nav-link"><a class="py-4 d-block text-body" href="/adm-spolt/sponcer-new">新規追加</a></li>
+          </ul>
+          </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link py-4" href="/adm-spolt/settings">
+              <span data-feather="bar-chart-2"></span>
+              各種設定
+            </a>
+          </li>
+          <% elsif @member.author_id == 2 %>
+        <li class="nav-item">
+          <a class="nav-link py-4" href="/adm-spolt/dashbord">
+            ダッシュボード <span class="sr-only">(現位置)</span>
+          </a>
+        </li>
+        <li class="nav-item drop">
+          <a class="nav-link py-4" href="/adm-spolt/competition">
+            大会情報・結果
+          </a>
+            <div class="dropdown-content">
+            <ul class="list-unstyled">
+              <li class="nav-link"><a class="py-4 d-block text-body" href="/adm-spolt/competition">投稿一覧</a></li>
+              <li class="nav-link"><a class="py-4 d-block text-body" href="/adm-spolt/competition-new">新規追加</a></li>
+              <li class="nav-link"><a class="py-4 d-block text-body" href="/adm-spolt/cat-events">種目カテゴリ</a></li>
+              <li class="nav-link"><a class="py-4 d-block text-body" href="/adm-spolt/cat-prefs">地域カテゴリ</a></li>
+              <li class="nav-link"><a class="py-4 d-block text-body" href="/adm-spolt/cat-generations">年代カテゴリ</a></li>
+              <li class="nav-link"><a class="py-4 d-block text-body" href="/adm-spolt/competition-tags">タグ</a></li>
+            </ul>
+            </div>
+        </li>
+        <li class="nav-item drop">
+          <a class="nav-link py-4" href="/adm-spolt/news">
+            ニュース
+          </a>
+          <div class="dropdown-content">
+            <ul class="list-unstyled">
+              <li class="nav-link"><a class="py-4 d-block text-body" href="/adm-spolt/news">ニュース一覧</a></li>
+              <li class="nav-link"><a class="py-4 d-block text-body" href="/adm-spolt/news-new">新規追加</a></li>
+              <li class="nav-link"><a class="py-4 d-block text-body" href="/adm-spolt/cat-news">ニュースカテゴリ</a></li>
+            </ul>
+            </div>
+        </li>
+          <% end %>
+      </ul>
+    </div>
+  </nav>

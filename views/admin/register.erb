@@ -1,0 +1,64 @@
+<%= erb :'admin/login-header' %>
+<div class="container-fluid">
+<div class="row">
+<%= erb :'admin/login-sidebar' %>
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h2">登録：管理者情報</h1>
+    </div>
+    <p>管理者情報の新規登録画面です。</p>
+    <% if @member.errors.present? %>
+    <% @member.errors.full_messages.each do |m| %>
+    <%= m %>
+    <% end %>
+    <%= erb :'admin/validates-error' %>
+    <% end %>
+    <form action="/adm-spolt/register" method="post">
+      <div class="form-group">
+    <label for="admin">権限</label>
+    <select class="form-control" id="admin" name="author_id">
+    <% @authors.each do |author| %>
+      <option value="<%= author.id %>"><%= author.author %></option>
+    <% end %>
+    </select>
+  </div>
+    <div class="mb-3">
+      <label for="userid">ユーザーID</label>
+      <% if @member.errors.messages[:userid].present? %>
+        <span class="text-danger pl-3"><%= @member.errors.messages[:userid].to_s.delete('["]') %></span>
+      <% end %>
+      <input class="form-control
+      <% if @member.errors.messages[:userid].present? %>
+        is-invalid
+      <% end %>
+      " name="userid" id="userid">
+      <small class="text-danger">登録したユーザーIDは後から変更できません</small>
+      </div>
+
+      <label for="password">パスワード</label>
+      <% if @member.errors.messages[:password].present? %>
+        <span class="text-danger pl-3"><%= @member.errors.messages[:password].to_s.delete('["]') %></span>
+      <% end %>
+      <input type="password" class="form-control mb-3
+      <% if @member.errors.messages[:password].present? %>
+        is-invalid
+      <% end %>
+      " name="password" id="password">
+      <label for="password_confirmation">パスワード（確認用）</label>
+      <% if @member.errors.messages[:password_confirmation].present? %>
+        <span class="text-danger pl-3"><%= @member.errors.messages[:password_confirmation].to_s.delete('["]') %></span>
+      <% end %>
+      <input type="password" class="form-control mb-3
+      <% if @member.errors.messages[:password_confirmation].present? %>
+        is-invalid
+      <% end %>
+      " name="password_confirmation" id="password_confirmation">
+      <label for="name">名前</label>
+      <input class="form-control mb-3" name="name" id="name">
+      <label for="mail">メール</label>
+      <input class="form-control mb-3" name="mail" id="mail">
+      <button type="submit" class="btn btn-success">登録</button>
+    </form>
+  </main>
+</div>
+</div>

@@ -1,0 +1,46 @@
+<%= erb :'admin/login-header' %>
+<div class="container-fluid">
+<div class="row">
+<%= erb :'admin/login-sidebar' %>
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h2">更新：ニュースカテゴリ</h1>
+    </div>
+    <p>ニュースカテゴリの更新画面です。</p>
+      <% if @cat_news.errors.present? %>
+        <%= erb :'admin/validates-error' %>
+      <% end %>
+      <div class="container">
+      <form action="/adm-spolt/cat-news-update/<%= @cat_news.id %>" method="post">
+        <dl class="row">
+          <dt class="col-md-2 lead">名前</dt>
+          <dd class="col-md-10">
+      <% if @cat_news.errors.messages[:name].present? %>
+        <span class="text-danger pl-3"><%= @cat_news.errors.messages[:name].to_s.delete('["]') %></span>
+      <% end %>
+            <input type="text" name="name" id="name" class="form-control mb-3
+      <% if @cat_news.errors.messages[:name].present? %>
+        is-invalid
+      <% end %>
+            " value="<%= @cat_news.name %>">
+          </dd>
+          <dt class="col-md-2 lead">スラッグ</dt>
+          <dd class="col-md-10">
+      <% if @cat_news.errors.messages[:slug].present? %>
+        <span class="text-danger pl-3"><%= @cat_news.errors.messages[:slug].to_s.delete('["]') %></span>
+      <% end %>
+            <input type="text" name="slug" id="slug" class="form-control mb-3
+      <% if @cat_news.errors.messages[:slug].present? %>
+        is-invalid
+      <% end %>
+            " value="<%= @cat_news.slug %>">
+          </dd>
+        </dl>
+        <div class="text-right">
+        <button class="btn m-0 bg-success white-text" type="submit">更新</button>
+        </div>
+        </form>
+      </div>
+  </main>
+</div>
+</div>

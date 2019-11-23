@@ -1,0 +1,81 @@
+<%= erb :'admin/login-header' %>
+<div class="container-fluid">
+<div class="row">
+<%= erb :'admin/login-sidebar' %>
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h2">地域カテゴリ</h1>
+    </div>
+    <p>地域カテゴリです。</p>
+    <% if @pref.errors.present? %>
+      <%= erb :'admin/validates-error' %>
+    <% end %>
+      <div class="row">
+        <div class="col-md-4">
+        <h3>新規追加</h3>
+          <form action="/adm-spolt/pref-new" method="post" enctype="multipart/form-data">
+            <label for="name">名前</label>
+            <% if @pref.errors.messages[:name].present? %>
+              <span class="text-danger pl-3"><%= @pref.errors.messages[:name].to_s.delete('["]') %></span>
+            <% end %>
+            <input type="text" name="name" id="name" class="form-control mb-3
+            <% if @pref.errors.messages[:name].present? %>
+              is-invalid
+            <% end %>
+            ">
+            <label for="name">地域</label>
+            <select class="browser-default custom-select mb-3">
+            <% @areas.each do |area| %>
+              <option value="<% area.id %>"><%= area.area %></option>
+            <% end %>
+            </select>
+            <label for="slug">スラッグ</label>
+            <% if @pref.errors.messages[:slug].present? %>
+              <span class="text-danger pl-3"><%= @pref.errors.messages[:slug].to_s.delete('["]') %></span>
+            <% end %>
+            <input type="text" name="slug" id="slug" class="form-control mb-3
+            <% if @pref.errors.messages[:slug].present? %>
+              is-invalid
+            <% end %>
+            ">
+            <label for="image">画像</label>
+            <div class="mb-3">
+            <input type="file" class="dropify" name="img">
+            </div>
+            <div class="text-center">
+              <button class="btn m-0 bg-success text-center white-text" type="submit">地域を追加</button>
+            </div>
+            </form>
+        </div>
+        <div class="col-md-8">
+        <h3>カテゴリ一覧</h3>
+          <table class="table table-striped">
+            <thead>
+            <tr class="bg-info">
+              <th style="width:10px;"><input type="checkbox" name="allchecked"></th>
+              <th class="font-weight-bold">名前</th>
+              <th class="font-weight-bold">ID</th>
+              <th class="font-weight-bold">スラッグ</th>
+              <th style="width:70px;"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @prefs.each do |pref| %>
+            <tr>
+              <td><input type="checkbox" name="<%= pref.id %>"></td>
+              <td><a class="text-primary" href="/adm-spolt/pref-edit/<%= pref.id %>"><%= pref.name %></a></td>
+              <td><%= pref.id %></td>
+              <td><%= pref.slug %></td>
+              <td><a class="text-danger" href="/adm-spolt/pref-destroy/<%= pref.id %>" onClick="return confirm('カテゴリ：【<%= pref.name %>】を削除します。\nよろしいですか？');">削除</a></td>
+            </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+  </main>
+</div>
+</div>
+<% if @notice %>
+  <%= erb :'admin/flash-modal' %>
+<% end %>

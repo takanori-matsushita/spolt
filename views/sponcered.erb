@@ -1,0 +1,197 @@
+<% path = request.path %>
+    <!-- breadcrumb -->
+<%= erb :'parts/breadclumb' %>
+        <!-- jumbotron -->
+        <div style="background-image: url(./images/inquiry.jpg);" class="jumbotron card card-image bg-jumbotron">
+          <div class="text-white text-center py-5 px-4 jumbotron-title">
+            <div>
+              <h1 class="card-title h1-responsive font-bold under-line"><strong>スポンサーについて</strong></h1>
+              <p class="mx-5 mb-5">当サイトへ広告を掲載されたい企業様ならびに、個人様は、以下をご覧の上、お問い合わせください。</p>
+            </div>
+          </div>
+        </div>
+      </header>
+    <!-- main -->
+    <div class="main-wrapper py-5 grey lighten-5">
+        <div class="container">
+        <% if path == "/sponcered" %>
+              <h2 class="twotone mb-3">スポンサー掲載に関して</h2>
+              <p>ここに掲載条件等を記述します。</p>
+              <h2 class="twotone mb-3">スポンサー掲載お問い合わせ</h2>
+              <div class="mb-3">
+                <ul class="list-group list-group-horizontal text-center">
+                  <li class="list-group-item flex-fill font-weight-bold bg-light">情報の入力</li>
+                  <li class="list-group-item flex-fill grey lighten-5">入力内容の確認</li>
+                  <li class="list-group-item flex-fill grey lighten-5">受付完了</li>
+                </ul>
+              </div>
+              <p class="font-weight-bold">上記内容に同意の上、ご掲載希望がございましたら以下のお問い合わせフォームよりお問い合わせください。</p>
+              <form class="h-adr needs-validation" action="/sponcered/confirm" method="post" novalidate>
+                  <span class="p-country-name" style="display:none;">Japan</span>
+              <div class="md-form">
+                <i class="fas fa-building prefix"></i>
+                <input type="text" name="company" id="company" class="form-control" required>
+                <label for="company">会社名<span class="ml-1 align-text-top badge badge-pill badge-danger text-white">必須</span></label>
+                <div style="margin-left:2.5rem" class="invalid-feedback">
+                  会社名を入力して下さい。
+                </div>
+              </div>
+              <div class="md-form">
+                <i class="fas fa-map-pin prefix"></i>
+                <input type="text" name="zip" id="zip" class="form-control p-postal-code" size="8" maxlength="8" required>
+                <label for="zip">郵便番号<span class="ml-1 align-text-top badge badge-pill badge-danger text-white">必須</span></label>
+                <div style="margin-left:2.5rem" class="invalid-feedback">
+                  郵便番号を入力して下さい。
+                </div>
+              </div>
+              <div class="md-form">
+                <i class="fas fa-map-marker-alt prefix"></i>
+                <input type="text" name="address" id="address" class="form-control p-region p-locality p-street-address p-extended-address" required>
+                <label for="address">住所<span class="ml-1 align-text-top badge badge-pill badge-danger text-white">必須</span></label>
+                <div style="margin-left:2.5rem" class="invalid-feedback">
+                  住所を入力して下さい。
+                </div>
+              </div>
+              <div class="md-form">
+                <i class="fas fa-user-tie prefix"></i>
+                <input type="text" name="position" id="position" class="form-control">
+                <label for="position">役職</label>
+              </div>
+              <div class="md-form">
+                <i class="fas fa-user prefix"></i>
+                <input type="text" name="name" id="name" class="form-control" required>
+                <label for="name">担当者名<span class="ml-1 align-text-top badge badge-pill badge-danger text-white">必須</span></label>
+                <div style="margin-left:2.5rem" class="invalid-feedback">
+                  担当者名を入力して下さい。
+                </div>
+              </div>
+              <div class="md-form">
+                  <i class="fas fa-user prefix"></i>
+                  <input type="text" name="furi" id="furi" class="form-control">
+                  <label for="furi">フリガナ</label>
+                </div>
+              <div class="md-form">
+                <i class="fas fa-envelope prefix"></i>
+                <input type="email" name="mail" id="mail" class="form-control" required>
+                <label for="mail">メールアドレス<span class="ml-1 align-text-top badge badge-pill badge-danger text-white">必須</span></label>
+                <div style="margin-left:2.5rem" class="invalid-feedback">
+                  メールアドレスが入力されていないか、メールアドレスのフォーマットが正しくありません。
+                </div>
+              </div>
+              <div class="md-form">
+                <i class="fas fa-phone prefix"></i>
+                <input type="tel" name="tel" id="tel" class="form-control">
+                <label for="tel">電話番号</label>
+              </div>
+              <div class="md-form">
+                <i class="fas fa-fax prefix"></i>
+                <input type="tel" name="fax" id="fax" class="form-control">
+                <label for="fax">FAX</label>
+              </div>
+              <div class="md-form">
+                <i class="fas fa-pencil-alt prefix"></i>
+                <textarea id="content" name="content" class="md-textarea form-control" rows="3"></textarea>
+                <label for="content">内容</label>
+              </div>
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary waves-effect waves-light">確認画面へ</button>
+              </div>
+            </form>
+            <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" charset="UTF-8"></script>
+            <% elsif path == "/sponcered/confirm" %>
+            <h2 class="twotone mb-3">入力内容確認</h2>
+              <div class="mb-3">
+                <ul class="list-group list-group-horizontal text-center">
+                  <li class="list-group-item flex-fill grey lighten-5">情報の入力</li>
+                  <li class="list-group-item flex-fill font-weight-bold bg-light">入力内容の確認</li>
+                  <li class="list-group-item flex-fill grey lighten-5">受付完了</li>
+                </ul>
+              </div>
+            <p class="font-weight-bold">入力内容をご確認の上、送信して下さい。もし誤りがあった場合は、前の画面に戻って訂正して下さい。</p>
+            <form class="h-adr" action="/sponcered/thanks" method="post">
+              <input type="hidden" id="company" name="company" value="<%= @company %>">
+              <input type="hidden" id="zip" name="zip" value="<%= @zip %>">
+              <input type="hidden" id="address" name="address" value="<%= @address %>">
+              <input type="hidden" id="position" name="position" value="<%= @position %>">
+              <input type="hidden" id="name" name="name" value="<%= @name %>">
+              <input type="hidden" id="furi" name="furi" value="<%= @furi %>">
+              <input type="hidden" id="mail" name="mail" value="<%= @mail %>">
+              <input type="hidden" id="tel" name="tel" value="<%= @tel %>">
+              <input type="hidden" id="fax" name="fax" value="<%= @fax %>">
+              <input type="hidden" id="content" name="content" value="<%= @content %>">
+              <table class="table table-striped">
+                <tr>
+                  <th class="w-25 text-right"><label for="company" class="font-weight-bold m-0">会社名</label></th>
+                  <td><%= @company %></td>
+                </tr>
+                <tr>
+                  <th class="w-25 text-right"><label for="zip" class="font-weight-bold m-0">〒</label></th>
+                  <td><%= @zip %></td>
+                </tr>
+                <tr>
+                  <th class="w-25 text-right"><label for="address" class="font-weight-bold m-0">住所</label></th>
+                  <td><%= @address %></td>
+                </tr>
+                <tr>
+                  <th class="w-25 text-right"><label for="position" class="font-weight-bold m-0">役職</label></th>
+                  <td><%= @position %></td>
+                </tr>
+                <tr>
+                  <th class="w-25 text-right"><label for="name" class="font-weight-bold m-0">担当者名</label></th>
+                  <td><%= @name %></td>
+                </tr>
+                <tr>
+                  <th class="w-25 text-right"><label for="furi" class="font-weight-bold m-0">フリガナ</label></th>
+                  <td><%= @furi %></td>
+                </tr>
+                <tr>
+                  <th class="w-25 text-right"><label for="mail" class="font-weight-bold m-0">メールアドレス</label></th>
+                  <td><%= @mail %></td>
+                </tr>
+                <tr>
+                  <th class="w-25 text-right"><label for="tel" class="font-weight-bold m-0">電話番号</label></th>
+                  <td><%= @tel %></td>
+                </tr>
+                <tr>
+                  <th class="w-25 text-right"><label for="fax" class="font-weight-bold m-0">FAX</label></th>
+                  <td><%= @fax %></td>
+                </tr>
+                <tr>
+                  <th class="w-25 text-right"><label for="content" class="font-weight-bold m-0">内容</label></th>
+                  <td><%= @content %></td>
+                </tr>
+              </table>
+              <div class="text-center">
+                <button type="button" onclick="history.back()" class="btn btn-danger waves-effect waves-light">修正する</button>
+                <button type="submit" class="btn btn-primary waves-effect waves-light">送信する</button>
+              </div>
+            </form>
+            <% else %>
+            <h2 class="twotone mb-3">送信完了</h2>
+              <div>
+                <ul class="list-group list-group-horizontal text-center mb-3">
+                  <li class="list-group-item flex-fill grey lighten-5">情報の入力</li>
+                  <li class="list-group-item flex-fill grey lighten-5">入力内容の確認</li>
+                  <li class="list-group-item flex-fill font-weight-bold bg-light">受付完了</li>
+                </ul>
+              </div>
+            <p>お問い合わせありがとうございます。お問い合わせいただいた内容につきましては、後ほど担当者よりご連絡させていただきます。</p>
+            <p>なお、1週間以上経ってもご連絡がない場合は、メールアドレスの入力ミスの可能性がございますので、大変お手数ですが、再度お問い合わせ下さい。</p>
+            <p>5秒後にトップページへリダイレクトします。移動しない場合は、以下のボタンを押して下さい。</p>
+          <div class="text-center">
+          <a class="btn btn-primary" href="/">HOMEへ</a>
+          </div>
+          <script type="text/javascript">
+          <!--
+          // 一定時間経過後に指定ページにジャンプする
+          waitTimer = 5; // 何秒後に移動する
+          url = "/"; // 移動するアドレス
+          function jumpPage() {
+            location.href = url;
+          }
+          setTimeout("jumpPage()",waitTimer*1000)
+          //-->
+          </script>
+          <% end %>
+        </div>
+      </div>

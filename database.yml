@@ -1,0 +1,7 @@
+development:
+  adapter: postgresql #posgresqlの場合
+  database: spolt_2899_db # データベース作成時に [create database データベース名] で指定した名前
+  host: #ここは指定しない
+  username: matsushitatakanori #ユーザー名
+  password: 6fpwr1a3
+  encoding: utf8

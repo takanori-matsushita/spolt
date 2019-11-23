@@ -1,0 +1,100 @@
+<%
+events = Event.all.order(id: "asc")
+c_event = Competition.group(:event_id).count(:event_id)
+c_infos = Competition.all.where(compe_kind_id: 1).order(created_at: "desc").limit(5)
+c_results = Competition.all.where(compe_kind_id: 2).order(updated_at: "desc").limit(5)
+archive_month = client.exec_params("select date_part('year',created_at) as year, date_part('month',created_at) as month, count(date_part('month',created_at)) from competitions group by year, month;")
+archive_year = client.exec_params("select date_part('year',created_at) as year from competitions group by year order by year desc;")
+i = 1
+%>
+<!-- sidebar -->
+<div class="col-md-4">
+  <p class="side-heading">競技別カテゴリ</p>
+  <div class="list-group side-cat mb-3">
+  <% events.each do |event| %>
+    <% if c_event[i].nil? %>
+    <% else %>
+    <a href="/cat-event/<%= event.slug %>" class="list-group-item list-group-item-action"><%= event.name %><span class="badge badge-pill badge-info float-right"><%= c_event[i] %></span></a>
+    <% end %>
+    <% i += 1 %>
+    <% end %>
+    </div>
+  <p class="side-heading">最新の試合情報</p>
+  <% c_infos.each do |c_info| %>
+  <div class="media">
+    <div class="view overlay zoom mr-3">
+      <a href="/compe-info/<%= c_info.id %>">
+        <img class="d-flex img-fluid"
+        <% if c_info.event.image.nil? %>
+          src="/images/origin/no-img-side.png"
+        <% else %>
+          src="/images/<%= c_info.event.image %>"
+        <% end %>
+        alt="<%= c_info.event.name %>">
+      </a>
+    </div>
+    <div class="media-body">
+      <small><%= c_info.created_at %></small>
+      <p class="mt-0 font-weight-bold"><a class="black-text" href="/compe-info/<%= c_info.id %>"><%= c_info.title %></a></p>
+    </div>
+  </div>
+  <hr class="w-100">
+  <% end %>
+  <a class="btn btn-primary d-block mb-3" href="/compe-info">試合情報一覧</a>           
+  
+  <p class="side-heading">最新の試合結果</p>
+  <% c_results.each do |c_result| %>
+  <div class="media">
+    <div class="view overlay zoom mr-3">
+      <a href="/compe-result/<%= c_result.id %>">
+        <img class="d-flex img-fluid"
+        <% if c_result.event.image.nil? %>
+          src="/images/origin/no-img-side.png"
+        <% else %>
+          src="/images/<%= c_result.event.image %>"
+        <% end %>
+        alt="<%= c_result.event.name %>">
+      </a>
+    </div>
+    <div class="media-body">
+    <small><%= c_result.updated_at  %></small>
+      <p class="mt-0 font-weight-bold"><a class="black-text" href="/compe-result/<%= c_result.id %>"><%= c_result.title %></a></p>
+    </div>
+  </div>
+  <hr class="w-100">
+  <% end %>
+  <a class="btn btn-primary d-block mb-3" href="/compe-result">試合結果一覧</a>
+  
+  <p class="side-heading">アーカイブ</p>
+  <!--Accordion wrapper-->
+  <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+
+<% archive_year.each do |year| %>
+  <!-- Accordion card -->
+    <div class="card">
+      <!-- Card header -->
+      <div class="card-header grey lighten-5" role="tab" id="arc<%= year['year'] %>">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#acv<%= year['year'] %>" aria-expanded="false" aria-controls="collapseOne1">
+          <p class="mb-0 black-text">
+
+          <%= year['year'] %>年<i class="fas fa-angle-down rotate-icon"></i></p>
+        </a>
+      </div>
+      <!-- Card body -->
+      <div id="acv<%= year['year'] %>" class="collapse" role="tabpanel" aria-labelledby="arc<%= year['year'] %>" data-parent="#accordionEx">
+        <div class="card-body p-0">
+          <div class="list-group side-cat grey lighten-5">
+          <% archive_month.each do |month| %>
+            <% if month['year']  == year['year'] %>
+            <a href="/archive/<%= month['year'] %>/<%= month['month'] %>" class="list-group-item list-group-item-action"><%= month['month'] %>月<span class="badge badge-pill badge-info float-right"><%= month['count'] %></span></a>
+            <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Accordion card -->
+    <% end %>
+  </div>
+</div>
+<!-- /.sidebar -->

@@ -1,0 +1,90 @@
+<% path = request.path %>
+<!-- breadcrumb -->
+<%= erb :'parts/breadclumb' %>
+  <!-- jumbotron -->
+  <div style="background-image: url(/images/inquiry.jpg);" class="jumbotron card card-image bg-jumbotron">
+    <div class="text-white text-center py-5 px-4 jumbotron-title">
+      <div>
+        <h1 class="card-title h1-responsive font-bold under-line"><strong>お問い合わせ</strong></h1>
+        <p class="mx-5 mb-5">ご要望・ご質問等ございましたら、以下のお問い合わせフォームよりご連絡ください。</p>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- main -->
+<div class="main-wrapper py-5 grey lighten-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <h2 class="twotone mb-3">お問合せフォーム</h2>
+        <% if path == "/inquiry" %>
+        <form action="/inquiry/thanks" method="post" class="needs-validation" novalidate>
+        <div class="md-form">
+          <i class="fas fa-user prefix"></i>
+          <label for="name">お名前<span class="ml-1 align-text-top badge badge-pill badge-danger text-white">必須</span></label>
+          <input type="text" name="name" id="name" class="form-control" required>
+          <div style="margin-left:2.5rem" class="invalid-feedback">
+          名前を入力して下さい。
+        </div>
+        </div>
+        <div class="md-form">
+          <i class="fas fa-envelope prefix"></i>
+          <input type="email" name="mail" id="mail" class="form-control" required>
+          <label for="mail">メールアドレス<span class="ml-1 align-text-top badge badge-pill badge-danger text-white">必須</span></label>
+        <div style="margin-left:2.5rem" class="invalid-feedback">
+          メールアドレスが入力されていないか、メールアドレスのフォーマットが正しくありません。
+        </div>
+        </div>
+        <div class="md-form">
+          <i class="far fa-calendar prefix"></i>
+          <input type="text" name="title" id="title" class="form-control" required>
+          <label for="title">件名<span class="ml-1 align-text-top badge badge-pill badge-danger text-white">必須</span></label>
+        <div style="margin-left:2.5rem" class="invalid-feedback">
+          件名を入力して下さい。
+        </div>
+        </div>
+        <div class="md-form">
+          <i class="fas fa-pencil-alt prefix"></i>
+          <textarea id="contents" name="content" class="md-textarea form-control" rows="3" required></textarea>
+          <label for="contents">内容<span class="ml-1 align-text-top badge badge-pill badge-danger text-white">必須</span></label>
+        <div style="margin-left:2.5rem" class="invalid-feedback">
+          内容を入力して下さい。
+        </div>
+        </div>
+        <!-- Default unchecked -->
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="check" required>
+          <label class="custom-control-label" for="check">上記内容で送信する<span class="ml-1 align-text-top badge badge-pill badge-danger text-white">必須</span></label>
+          <p>※内容に間違いがないかご確認ください。</p>
+        <div class="invalid-feedback">
+          チェックをして下さい。
+        </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn-primary waves-effect waves-light btn">送信する</button>
+        </div>
+        </form>
+        <% elsif path == "/inquiry/thanks" %>
+          <p>お問い合わせありがとうございます。お問い合わせいただいた内容につきましては、後ほど担当者よりご連絡させていただきます。</p>
+          <p>なお、1週間以上経ってもご連絡がない場合は、メールアドレスの入力ミスの可能性がございますので、大変お手数ですが、再度お問い合わせ下さい。</p>
+          <p>5秒後にトップページへリダイレクトします。移動しない場合は、以下のボタンを押して下さい。</p>
+          <div class="text-center">
+          <a class="btn btn-primary" href="/">HOMEへ</a>
+          </div>
+          <script type="text/javascript">
+          <!--
+          // 一定時間経過後に指定ページにジャンプする
+          waitTimer = 5; // 何秒後に移動する
+          url = "/"; // 移動するアドレス
+          function jumpPage() {
+            location.href = url;
+          }
+          setTimeout("jumpPage()",waitTimer*1000)
+          //-->
+          </script>
+        <% end %>
+      </div>
+      <%= erb :'parts/sidebar' %>
+    </div>
+  </div>
+</div>

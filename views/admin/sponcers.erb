@@ -1,0 +1,38 @@
+<%= erb :'admin/login-header' %>
+<div class="container-fluid">
+<div class="row">
+<%= erb :'admin/login-sidebar' %>
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="d-flex flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h2">スポンサー一覧</h1>
+      <a role="button" href="/adm-spolt/sponcer-new" class="btn btn-primary btn-sm">新規追加</a>
+    </div>
+    <p>スポンサー覧画面です。</p>
+    <table class="table table-striped">
+      <tr>
+        <th style="width:30px;"><input type="checkbox" name="allchecked"></th>
+        <th style="width:40%;">スポンサー名</th>
+        <th>画像</th>
+        <th>投稿日</th>
+        <th>更新日</th>
+        <th>投稿ID</th>
+        <th style="width:70px;"></th>
+      </tr>
+    <% @sponcers.each do |sponcer| %>
+      <tr>
+        <td><input type="checkbox" name="<%= sponcer.id %>"></td>
+        <td><a class="text-primary" href="/adm-spolt/sponcer-edit/<%= sponcer.id %>"><%= sponcer.title %></a></td>
+        <td><a href="/adm-spolt/sponcer-edit/<%= sponcer.id %>"><img style="width:100px;" src="/images/<%= sponcer.image %>"></a></td>
+        <td><%= sponcer.created_at %></td>
+        <td><%= sponcer.updated_at %></td>
+        <td><%= sponcer.id %></td>
+        <td><a class="text-danger" href="/adm-spolt/sponcer-destroy/<%= sponcer.id %>" onClick="return confirm('スポンサー：<%= sponcer.title %>を削除します。\nよろしいですか？');">削除</a></td>
+      </tr>
+    <% end %>
+    </table>
+  </main>
+</div>
+</div>
+<% if @notice %>
+  <%= erb :'admin/flash-modal' %>
+<% end %>

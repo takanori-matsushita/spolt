@@ -1,0 +1,23 @@
+
+<!-- breadcrumb -->
+<nav style="background-color: #e9ecef;" aria-label="breadcrumb">
+  <div class="container">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a class="black-text" href="/">Home</a><i class="fas fa-angle-right mx-2"
+        aria-hidden="true"></i></li>
+        <li class="breadcrumb-item active">
+          <%= @page.title %>
+        </li>
+      </ol>
+    </div>
+  </nav>
+  <!-- jumbotron -->
+  <div style="background-image: url(/images/<%= @page.image %>);" class="jumbotron card card-image bg-jumbotron">
+    <div class="text-white text-center py-5 px-4 jumbotron-title">
+      <div>
+        <h1 class="card-title h1-responsive font-bold under-line"><strong><%= @page.title %></strong></h1>
+        <p class="mx-5 mb-5"><%= @page.disc %></%=>
+      </div>
+    </div>
+  </div>
+</header>

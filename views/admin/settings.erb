@@ -1,0 +1,103 @@
+<%= erb :'admin/login-header' %>
+<div class="container-fluid">
+<div class="row">
+<%= erb :'admin/login-sidebar' %>
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h2">各種設定</h1>
+    </div>
+    <p>各種設定画面です。</p>
+    <div class="container">
+    <form action="/adm-spolt/settings-update" method="post" enctype="multipart/form-data">
+    <h2 class="pb-5 font-weight-bold">一般設定</h2>
+      <dl class="row">
+        <dt class="col-md-2"><label for="title">サイトタイトル</label></dt>
+        <dd class="col-md-10">
+        <input type="text" id="title" name="title" class="form-control" value="<%= h @setting.title %>">
+        </dd>
+        <dt class="col-md-2"><label for="disc">メタディスクリプション</label></dt>
+        <dd class="col-md-10">
+        <div class="form-group">
+        <textarea class="form-control" name="disc" id="disc" rows="3"><%= h @setting.disc %></textarea>
+        </div>
+        </dd>
+        <dt class="col-md-2"><label for="logo">サイトロゴ<br><small class="text-danger">サイトのヘッダーとフッターに選択したロゴを表示します</small></label></dt>
+        <dd class="col-md-10">
+        <div class="mb-3">
+        <input type="file" class="dropify" name="logo"
+        <% if @setting.logo.nil? %>
+        <% else %>
+        data-default-file="/images/top/<%= @setting.logo %>"
+        <% end %>
+        >
+        </div>
+        </dd>
+        <dt class="col-md-2"><label for="icon">サイトアイコン<br><small class="text-danger">推奨サイズ:512×512px</small></label></dt>
+        <dd class="col-md-10">
+        <div class="mb-3">
+        <input type="file" class="dropify" name="icon"
+        <% if @setting.icon.nil? %>
+        <% else %>
+        data-default-file="/images/<%= @setting.icon %>"
+        <% end %>
+        >
+        </div>
+        </dd>
+      </dl>
+      <h2 class="pb-5 font-weight-bold">SNS設定</h2>
+      <dl class="row">
+      <dt class="col-md-2"><label for="fb_app_id">Facebook App ID</label></dt>
+      <dd class="col-md-10">
+      <input type="text" id="fb_app_id" name="fb_app_id" class="w-25 form-control" value="<%= h @setting.fb_app_id %>">
+      </dd>
+      <dt class="col-md-2"><label for="fb_account">FacebookページのURL</label></dt>
+      <dd class="col-md-10">
+      <div class="float-left lead">https://www.facebook.com/</div>
+      <input type="text" id="fb_account" name="fb_account" class="w-25 form-control" value="<%= h @setting.fb_account %>">
+      </dd>
+      <dt class="col-md-2"><label for="tw_account">Twitterアカウント</label></dt>
+      <dd class="col-md-10">
+      <div class="float-left lead">@</div>
+      <input type="text" id="tw_account" name="tw_account" class="w-25 form-control" value="<%= h @setting.tw_account %>">
+      </dd>
+      <dt class="col-md-2"><label for="tw_account">Twitterカードサイズ</label></dt>
+      <dd class="col-md-10">
+      <div class="custom-control custom-radio custom-control-inline">
+      <% chk = @setting.tw_style %>
+        <input type="radio" class="custom-control-input" id="summary1" name="tw_style" value="summary_large_image"
+        <% if chk == "summary_large_image" %>
+        checked="checked"
+        <% end %>
+        >
+        <label class="custom-control-label" for="summary1">大（summary_large_image）</label>
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
+        <input type="radio" class="custom-control-input" id="summary2" name="tw_style" value="summary"
+        <% if chk == "summary" %>
+        checked="checked"
+        <% end %>
+        >
+        <label class="custom-control-label" for="summary2">小（summary）</label>
+      </div>
+      </dd>
+      <dt class="col-md-2"><label for="ogpimage">OGPイメージ<br><small><span class="text-danger">推奨サイズ：630×1200px</span><br>表示させたい部分は630×630px以内に編集して下さい</small></label></dt>
+      <dd class="col-md-10">
+      <div class="mb-3">
+      <input type="file" class="dropify" name="ogp"
+      <% if @setting.ogpimage.nil? %>
+      <% else %>
+      data-default-file="/images/<%= @setting.ogpimage %>"
+      <% end %>
+      >
+      </div>
+      </dd>
+      </dl>
+      <button class="btn m-0 bg-success mb-3 text-center white-text" type="submit">更新</button>
+      </form>
+      </div>
+  </main>
+</div>
+</div>
+<% if @notice %>
+  <%= erb :'admin/flash-modal' %>
+<% end %>

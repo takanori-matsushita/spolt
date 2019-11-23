@@ -1,0 +1,38 @@
+<%= erb :'parts/breadclumb' %>
+<!-- jumbotron -->
+<div style="background-image: url(/images/);" class="jumbotron card card-image bg-jumbotron">
+  <div class="text-white text-center py-5 px-4 jumbotron-title">
+    <div>
+      <h1 class="card-title h1-responsive font-bold under-line"><strong>検索</strong></h1>
+      <p><%= @word %>の検索結果</p>
+    </div>
+  </div>
+</div>
+</header>
+<div class="main-wrapper py-5 grey lighten-5">
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+    <% @searchs.each do |search| %>
+    <% if search.compe_kind_id == 1 %>
+    <a href="/compe-info/<%= search.id %>">
+    <% elsif search.compe_kind_id == 2 %>
+    <a href="/compe-result/<%= search.id %>">
+    <% end %>
+    <div class="media z-depth-1 mb-3 p-1">
+    <img class="d-flex mr-3" src="/images/<% search.event.image %>" alt="<%= search.event.name %>">
+    <div class="media-body">
+      <div class="chip bg-primary text-white"><%= search.event.name %></div>
+      <div class="chip bg-info text-white"><%= search.pref.name %></div>
+      <div class="chip bg-warning text-white"><%= search.generation.name %></div>
+      <h5 class="mt-0 font-weight-bold"><%= search.title %></h5>
+      <%= search.excerpt %>
+    </div>
+    </div>
+    </a>
+    <% end %>
+    </div>
+<%= erb :'parts/sidebar' %>
+  </div>
+</div>
+</div>

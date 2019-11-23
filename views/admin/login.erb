@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="row">
+      <div class="col-6 offset-3">
+        
+        <!-- Default form login -->
+        <form class="text-center grey lighten-4 p-5" action="/adm-spolt/login" method="post">
+          <p class="h4 mb-4">ログインフォーム</p>
+          <!-- Email -->
+          <input type="text" id="userid" name="userid" class="form-control mb-4" placeholder="ログインID">
+          
+          <!-- Password -->
+          <input type="password" id="password" name="password" class="form-control mb-4" placeholder="パスワード">
+          <% if @message %>
+          <div class="alert alert-danger" role="alert">
+            <%= @message %>
+          </div>
+          <% end %>
+          <% if @notice %>
+          <div class="alert alert-warning" role="alert">
+              <%= @notice %>
+            </div>
+          <% end %>
+            <div>
+              <!-- Remember me -->
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="remember">
+                <label class="custom-control-label mb-3" for="remember">ログイン情報を記憶する</label>
+              </div>
+            </div>
+            <div>
+              <!-- Forgot password -->
+              <a href="">パスワードを忘れた場合</a>
+            </div>
+          <!-- Sign in button -->
+          <button class="btn btn-info btn-block mx-0 my-4" type="submit">ログイン</button>
+
+          
+          
+        </form>
+        <!-- Default form login -->
+      </div>
+    </div>
+    
+  </div>

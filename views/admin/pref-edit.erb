@@ -1,0 +1,53 @@
+<%= erb :'admin/login-header' %>
+<div class="container-fluid">
+<div class="row">
+<%= erb :'admin/login-sidebar' %>
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h2">更新：地域カテゴリ</h1>
+    </div>
+    <p>地域カテゴリの更新画面です。</p>
+      <div class="container">
+      <form action="/adm-spolt/pref-update/<%= @pref.id %>" method="post" enctype="multipart/form-data">
+        <dl class="row">
+          <dt class="col-md-2 lead">名前</dt>
+          <dd class="col-md-10">
+            <input type="text" name="name" id="name" class="form-control mb-3" value="<%= @pref.name %>">
+          </dd>
+          <dt class="col-md-2 lead">地域</dt>
+          <dd class="col-md-10">
+          <select class="browser-default custom-select mb-3">
+          <% chk = @pref.area.id %>
+          <% @areas.each do |area| %>
+            <option value="<% area.id %>"
+            <% if chk == area.id %>
+            selected
+            <% end %>
+            ><%= area.area %></option>
+          <% end %>
+          </select>
+          </dd>
+          <dt class="col-md-2 lead">スラッグ</dt>
+          <dd class="col-md-10">
+            <input type="text" name="slug" id="slug" class="form-control mb-3" value="<%= @pref.slug %>">
+          </dd>
+          <dt class="col-md-2 lead">画像</dt>
+          <dd class="col-md-10">
+          <div class="mb-3">
+          <input type="file" class="dropify" name="img" 
+          <% if @pref.image.nil? %>
+          <% else %>
+          data-default-file="/images/<%= @pref.image %>"
+          <% end %>
+          >
+          </div>
+          </dd>
+        </dl>
+        <div class="text-right">
+        <button class="btn m-0 bg-success white-text" type="submit">更新</button>
+        </div>
+        </form>
+      </div>
+  </main>
+</div>
+</div>

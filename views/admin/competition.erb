@@ -1,0 +1,42 @@
+<%= erb :'admin/login-header' %>
+<div class="container-fluid">
+<div class="row">
+<%= erb :'admin/login-sidebar' %>
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="d-flex flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h2">大会情報・結果一覧</h1>
+      <a role="button" href="/adm-spolt/competition-new" class="btn btn-primary btn-sm">新規追加</a>
+    </div>
+    <p>大会情報・結果の一覧画面です。</p>
+    <table class="table table-striped">
+      <tr>
+        <th style="width:30px;"><input type="checkbox" name="allchecked"></th>
+        <th>タイトル</th>
+        <th>投稿種別</th>
+        <th>種目</th>
+        <th>地域</th>
+        <th>年代</th>
+        <th>大会日</th>
+        <th>最終更新日</th>
+        <th style="width:70px;"></th>
+      </tr>
+    <% @competitions.each do |c| %>
+      <tr>
+        <td><input type="checkbox" name="<%= c.id %>"></td>
+        <td><a class="text-primary" href="/adm-spolt/competition-edit/<%= c.id %>"><%= c.title %></a></td>
+        <td><%= c.compe_kind.name %></td>
+        <td><%= c.event.name %></td>
+        <td><%= c.pref.name %></td>
+        <td><%= c.generation.name %></td>
+        <td><%= c.compe_date %></td>
+        <td><%= c.updated_at %></td>
+        <td><a class="text-danger" href="/adm-spolt/competition-destroy/<%= c.id %>" onClick="return confirm('<%= c.title %>の記事を削除します。\nよろしいですか？');">削除</a></td>
+      </tr>
+    <% end %>
+    </table>
+  </main>
+</div>
+</div>
+<% if @notice %>
+  <%= erb :'admin/flash-modal' %>
+<% end %>

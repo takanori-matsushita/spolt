@@ -1,0 +1,61 @@
+<%= erb :'admin/login-header' %>
+<div class="container-fluid">
+<div class="row">
+<%= erb :'admin/login-sidebar' %>
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h2">新規追加：トップスライダー</h1>
+    </div>
+    <p>トップスライダーの新規追加画面です。</p>
+      <% if @slider.errors.present? %>
+        <%= erb :'admin/validates-error' %>
+      <% end %>
+    <div class="row">
+    <div class="col-md-9">
+      <form action="/adm-spolt/slider-create" method="post" enctype="multipart/form-data">
+        <label for="title">タイトル</label>
+      <% if @slider.errors.messages[:title].present? %>
+        <span class="text-danger pl-3"><%= @slider.errors.messages[:title].to_s.delete('["]') %></span>
+      <% end %>
+        <input type="text" name="title" id="title" class="form-control mb-3
+      <% if @slider.errors.messages[:title].present? %>
+        is-invalid
+      <% end %>
+        " value="<%= @slider.title %>">
+        <div class="mb-3">
+        <label for="title">画像</label>
+      <% if @slider.errors.messages[:image].present? %>
+        <span class="text-danger pl-3"><%= @slider.errors.messages[:image].to_s.delete('["]') %></span>
+      <% end %>
+        <input type="file" class="dropify
+      <% if @slider.errors.messages[:image].present? %>
+        is-invalid
+      <% end %>
+        " name="img" 
+        <% if @slider.image.nil? %>
+        <% else %>
+        data-default-file="/images/<%= @slider.image %>"
+        <% end %>
+        >
+        </div>
+        <label for="title">画像の説明</label>
+        <input type="text" name="content" id="content" class="form-control mb-3" value="<%= @slider.content %>">
+        <label for="title">リンク(URL)</label>
+        <input type="text" name="url" id="url" class="form-control mb-3" value="<%= @slider.url %>">
+        <small>URLを入力すると画像の上にボタンが表示されます</small>
+        </div>
+    <div class="col-md-3">
+    <div class="row pb-3">
+    <div class="col-md-6">
+    <button class="btn m-0 bg-info btn-block text-center white-text text-nowrap" type="submit">下書き</button>
+    </div>
+    <div class="col-md-6">
+    <button class="btn m-0 bg-success btn-block text-center white-text" type="submit">更新</button>
+    </div>
+    </div>
+      </form>
+    </div>
+    </div>
+  </main>
+</div>
+</div>

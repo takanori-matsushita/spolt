@@ -1,0 +1,58 @@
+<%= erb :'admin/login-header' %>
+<div class="container-fluid">
+<div class="row">
+<%= erb :'admin/login-sidebar' %>
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h2">編集：管理者情報</h1>
+    </div>
+    <p>管理者情報の編集画面です。</p>
+    <% if @member.errors.present? %>
+    <%= erb :'admin/validates-error' %>
+    <% end %>
+    <form action="/admin/update" method="post">
+      <% selected = @member.author_id %>
+      <% if @member.author_id == 1 %>
+      <div class="form-group">
+        <label for="admin">権限</label>
+        <select class="form-control" id="admin" name="author_id">
+        <% @authors.each do |author| %>
+          <option value="<%= author.id %>"
+            <% if selected == author.id %>
+            selected
+            <% end %>
+            ><%= author.author %></option>
+        <% end %>
+        </select>
+      </div>
+      <% end %>
+      <label for="name">名前</label>
+      <input class="form-control mb-3" name="name" id="name" value="<%= @member.name %>">
+      <label for="password">パスワード</label>
+      <% if @member.errors.messages[:password].present? %>
+        <span class="text-danger pl-3"><%= @member.errors.messages[:password].to_s.delete('["]') %></span>
+      <% end %>
+      <input type="password" class="form-control mb-3
+      <% if @member.errors.messages[:password].present? %>
+        is-invalid
+      <% end %>
+      " name="password" id="password" value="<%= @member.password %>">
+            <label for="password_confirmation">パスワード（確認用）</label>
+      <% if @member.errors.messages[:password_confirmation].present? %>
+        <span class="text-danger pl-3"><%= @member.errors.messages[:password_confirmation].to_s.delete('["]') %></span>
+      <% end %>
+      <input type="password" class="form-control mb-3
+      <% if @member.errors.messages[:password_confirmation].present? %>
+        is-invalid
+      <% end %>
+      " name="password_confirmation" id="password_confirmation">
+      <label for="mail">メール</label>
+      <input class="form-control mb-3" name="mail" id="mail" value="<%= @member.mail %>">
+      <button type="submit" class="btn btn-primary">更新</button>
+    </form>
+  </main>
+</div>
+</div>
+<% if @notice %>
+  <%= erb :'admin/flash-modal' %>
+<% end %>

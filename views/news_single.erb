@@ -1,0 +1,25 @@
+<%= erb :'parts/breadclumb' %>
+<!-- jumbotron -->
+<div 
+style="background-image: url(/images/);"
+class="jumbotron card card-image bg-jumbotron">
+  <div class="text-white text-center py-5 px-4 jumbotron-title">
+    <div>
+      <h1 class="card-title h1-responsive font-bold under-line"><strong><%= h @new.title %></strong></h1>
+      <p><%= h @new.excerpt %></p>
+    </div>
+  </div>
+</div>
+</header>
+<div class="main-wrapper py-5 grey lighten-5">
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+    <h2 class="twotone mb-3"><%= h @new.title %></h2>
+    <span style="width:85px;" class="text-center d-inline-block news <%= @new.newscategory.slug %>"><%= @new.newscategory.name %></span>
+    <%= @new.content %>
+    </div>
+<%= erb :'parts/sidebar' %>
+  </div>
+</div>
+</div>

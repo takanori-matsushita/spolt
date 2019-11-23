@@ -1,0 +1,36 @@
+<%= erb :'parts/breadclumb' %>
+<!-- jumbotron -->
+<div 
+<% if @compe.event.image.nil? %>
+<% else %>
+style="background-image: url(/images/<%= @compe.image %>);"
+<% end %>
+class="jumbotron card card-image bg-jumbotron">
+  <div class="text-white text-center py-5 px-4 jumbotron-title">
+    <div>
+      <h1 class="card-title h1-responsive font-bold under-line"><strong><%= h @compe.title %></strong></h1>
+      <p><%= h @compe.excerpt %></p>
+    </div>
+  </div>
+</div>
+</header>
+<div class="main-wrapper py-5 grey lighten-5">
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+    <ul class="list-unstyled d-flex justify-content-end">
+      <li class="mr-5">掲載日:<%= h @compe.created_at %></li>
+      <li>最終更新日:<%= h @compe.updated_at %></li>
+    </ul>
+    <h2 class="twotone mb-3"><%= h @compe.title %></h2>
+    <p><%= @compe.disc %></p>
+    <%= erb :'parts/snsshare' %>
+    <div class="content js-toc-content soft-double">
+    <%= @compe.content %>
+    </div>
+<%= erb :'parts/snsshare' %>
+    </div>
+<%= erb :'parts/sidebar' %>
+  </div>
+</div>
+</div>

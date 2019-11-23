@@ -1,0 +1,83 @@
+<%= erb :'admin/login-header' %>
+<div class="container-fluid">
+<div class="row">
+<%= erb :'admin/login-sidebar' %>
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h2">更新：固定ページ</h1>
+      <ul style="margin-bottom:-20px;" class="list-unstyled">
+      <li class="font-weight-bold list-inline-item mr-5">投稿日：<%= @page.created_at %></li>
+      <li class="font-weight-bold list-inline-item">更新日：<%= @page.updated_at %></li>
+      </ul>
+    </div>
+    <p>固定ページの更新画面です。</p>
+    <% if @page.errors.present? %>
+    <%= erb :'admin/validates-error' %>
+    <% end %>
+    <form action="/adm-spolt/page-update/<%= @page.id %>" method="post" enctype="multipart/form-data">
+      <div class="mb-3">
+      <span class="font-weight-bold lead">ページURL:
+      <a class="lead" href="<%= "/#{@page.permalink}" %>"><%= "/#{@page.permalink}" %></a>
+      </span>
+      </div>
+    <div class="row">
+    <div class="col-md-9">
+        <label for="title">タイトル</label>
+        <% if @page.errors.messages[:title].present? %>
+      <span class="text-danger pl-3"><%= @page.errors.messages[:title].to_s.delete('["]') %></span>
+      <% end %>
+        <input type="text" name="title" id="title" class="form-control form-control-lg mb-3
+        <% if @page.errors.messages[:title].present? %>
+        is-invalid
+      <% end %>
+        " value="<%= @page.title %>">
+        <label for="permalink">パーマリンク</label>
+      <% if @page.errors.messages[:permalink].present? %>
+      <span class="text-danger pl-3"><%= @page.errors.messages[:permalink].to_s.delete('["]') %></span>
+      <% end %>
+        <input type="text" name="permalink" id="permalink" class="form-control form-control-lg mb-3
+      <% if @page.errors.messages[:permalink].present? %>
+        is-invalid
+      <% end %>
+        " value="<%= @page.permalink %>">
+        <div class="form-group">
+          <label for="content">内容</label>
+          <textarea class="form-control" name="content" id="contents" rows="20"><%= @page.content %></textarea>
+        </div>
+        <div class="form-group">
+        <label for="discription">メタディスクリプション</label>
+          <textarea class="form-control" name="disc" id="discription" rows="3"><%= @page.disc %></textarea>
+        </div>
+        <div class="form-group">
+          <label for="excerpt">追加CSS</label>
+          <textarea class="form-control" name="css" id="excerpt" rows="3"><%= @page.css %></textarea>
+          <small class="text-danger">個別でデザインを設定したい場合に入力してください。</small>
+        </div>
+    </div>
+    <div class="col-md-3">
+    <div class="row pb-3">
+    <div class="col-12 mb-3">
+    <label for="title">画像</label>
+    <input type="file" class="dropify" name="img"
+    <% if @page.image.nil? %>
+    <% else %>
+    data-default-file="/images/<%= @page.image %>"
+    <% end %>
+    >
+  </div>
+    <div class="col-md-6">
+    <button class="btn m-0 bg-info btn-block text-center white-text text-nowrap" type="submit">下書き</button>
+    </div>
+    <div class="col-md-6">
+    <button class="btn m-0 bg-success btn-block text-center white-text" type="submit">更新</button>
+    </div>
+    </div>
+    </form>
+    </div>
+    </div>
+  </main>
+</div>
+</div>
+<% if @notice %>
+  <%= erb :'admin/flash-modal' %>
+<% end %>

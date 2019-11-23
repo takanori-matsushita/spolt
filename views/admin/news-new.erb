@@ -1,0 +1,72 @@
+<%= erb :'admin/login-header' %>
+<div class="container-fluid">
+<div class="row">
+<%= erb :'admin/login-sidebar' %>
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h2">新規作成：ニュース</h1>
+    </div>
+    <p>ニュースの新規作成画面です。</p>
+      <% if @news.errors.present? %>
+        <%= erb :'admin/validates-error' %>
+      <% end %>
+    <div class="row">
+    <div class="col-md-9">
+      <form action="/adm-spolt/news-create" method="post">
+        <label for="title">タイトル</label>
+      <% if @news.errors.messages[:title].present? %>
+        <span class="text-danger pl-3"><%= @news.errors.messages[:title].to_s.delete('["]') %></span>
+      <% end %>
+        <input type="text" name="title" id="title" class="form-control form-control-lg mb-3
+      <% if @news.errors.messages[:title].present? %>
+        is-invalid
+      <% end %>
+        " value="<%= @news.title %>">
+        <div class="form-group">
+          <label for="content">内容</label>
+          <textarea class="form-control" name="content" id="contents" rows="20"><%= @news.content %></textarea>
+        </div>
+        <div class="form-group">
+        <label for="discription">メタディスクリプション</label>
+          <textarea class="form-control" name="disc" id="discription" rows="3"><%= @news.disc %></textarea>
+        </div>
+        <div class="form-group">
+          <label for="excerpt">抜粋</label>
+          <textarea class="form-control" name="excerpt" id="excerpt" rows="3"><%= @news.excerpt %></textarea>
+        </div>
+    </div>
+    <div class="col-md-3">
+    <div class="row pb-3">
+    <div class="col-md-6">
+    <button class="btn m-0 bg-info btn-block text-center white-text text-nowrap" type="button">下書き</button>
+    </div>
+    <div class="col-md-6">
+    <button class="btn m-0 bg-success btn-block text-center white-text" type="submit">更新</button>
+    </div>
+    </div>
+    <label for="cat_id">ニュースカテゴリ</label>
+      <% if @news.errors.messages[:newscategory_id].present? %>
+        <span class="text-danger pl-3"><%= @news.errors.messages[:newscategory_id].to_s.delete('["]') %></span>
+      <% end %>
+      <select class="custom-select mb-3
+      <% if @news.errors.messages[:newscategory_id].present? %>
+        is-invalid
+      <% end %>
+      " name="cat_id" size="5">
+      <% chk = @news.newscategory_id %>
+      <% @cat_news.each do |c| %>
+      <option value="<%= c.id %>"
+      <% if chk == c.id %>
+      selected
+      <% end %>
+      >
+      <%= c.name %>
+      </option>
+      <% end %>
+      </select>
+      </form>
+    </div>
+    </div>
+  </main>
+</div>
+</div>

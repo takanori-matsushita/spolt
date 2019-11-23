@@ -1,0 +1,68 @@
+<%= erb :'admin/login-header' %>
+<div class="container-fluid">
+<div class="row">
+<%= erb :'admin/login-sidebar' %>
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h2">編集：スポンサー</h1>
+      <ul style="margin-bottom:-20px;" class="list-unstyled">
+      <li class="font-weight-bold list-inline-item mr-5">投稿日：<%= @sponcer.created_at %></li>
+      <li class="font-weight-bold list-inline-item">更新日：<%= @sponcer.updated_at %></li>
+      </ul>
+    </div>
+  <p>スポンサーの編集画面です。</p>
+      <% if @sponcer.errors.present? %>
+        <%= erb :'admin/validates-error' %>
+      <% end %>
+    <div class="row">
+    <div class="col-md-9">
+      <form action="/adm-spolt/sponcer-update/<%= @sponcer.id %>" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+        <label for="title">タイトル</label>
+      <% if @sponcer.errors.messages[:title].present? %>
+        <span class="text-danger pl-3"><%= @sponcer.errors.messages[:title].to_s.delete('["]') %></span>
+      <% end %>
+        <input type="text" name="title" id="title" class="form-control
+      <% if @sponcer.errors.messages[:title].present? %>
+        is-invalid
+      <% end %>
+        " value="<%= @sponcer.title %>">
+        <small>画像のalt属性にも適用されます</small>
+        </div>
+        <div class="mb-3">
+        <label for="title">画像</label>
+      <% if @sponcer.errors.messages[:image].present? %>
+        <span class="text-danger pl-3"><%= @sponcer.errors.messages[:image].to_s.delete('["]') %></span>
+      <% end %>
+        <input type="file" class="dropify custom-file-input
+      <% if @sponcer.errors.messages[:image].present? %>
+        is-invalid
+      <% end %>
+        " name="img"  
+        <% if @sponcer.image.nil? %>
+        <% else %>
+        data-default-file="/images/<%= @sponcer.image %>"
+        <% end %>
+        >
+        </div>
+        <div class="mb-3">
+        <label for="title">リンク(URL)</label>
+        <input type="text" name="url" id="url" class="form-control" value="<%= @sponcer.url %>">
+        <small>URLを入力すると画像の上にボタンが表示されます</small>
+        </div>
+        </div>
+    <div class="col-md-3">
+    <div class="row pb-3">
+    <div class="col-md-6">
+    <button class="btn m-0 bg-info btn-block text-center white-text text-nowrap" type="submit">下書き</button>
+    </div>
+    <div class="col-md-6">
+    <button class="btn m-0 bg-success btn-block text-center white-text" type="submit">更新</button>
+    </div>
+    </div>
+      </form>
+    </div>
+    </div>
+  </main>
+</div>
+</div>

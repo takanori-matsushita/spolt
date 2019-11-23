@@ -1,0 +1,155 @@
+<%= erb :'admin/login-header' %>
+<div class="container-fluid">
+<div class="row">
+<%= erb :'admin/login-sidebar' %>
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h2">新規作成：大会情報・結果</h1>
+    </div>
+    <p>大会情報・結果の新規作成画面です。</p>
+    <% if @competition.errors.present? %>
+    <%= erb :'admin/validates-error' %>
+    <% end %>
+    <div class="row">
+    <div class="col-md-9">
+      <form action="/adm-spolt/competition-new" method="post">
+      <div class="mb-3">
+      <label for="compe-type">投稿の種類</label>
+      <% if @competition.errors.messages[:compe_kind_id].present? %>
+        <span class="text-danger pl-3"><%= @competition.errors.messages[:compe_kind_id].to_s.delete('["]') %></span>
+        <% end %>
+      <br>
+      <% ctype = @competition.compe_kind_id %>
+      <% @compe_types.each do |compe| %>
+        <div class="custom-control custom-radio custom-control-inline">
+          <input type="radio" class="custom-control-input
+            <% if @competition.errors.messages[:compe_kind_id].present? %>
+            is-invalid
+            <% end %>
+          " id="compe<%= compe.id %>" name="compe_kind_id" value="<%= compe.id %>"
+          <% if compe.id == ctype %>
+          checked
+          <% end %>
+          >
+          <label class="custom-control-label" for="compe<%= compe.id %>"><%= compe.name %></label>
+        </div>
+        <% end %>
+      </div>
+      <div class="row">
+      <div class="col-6">
+        <label for="compe_date">大会日</label>
+        <input type="text" name="compe_date" id="datepicker" class="form-control form-control-lg mb-3" value="<%= @competition.compe_date %>">
+      </div>
+      <div class="col-6">
+      <label for="compe_end">最終日</label>
+        <input type="text" name="compe_end" id="datepicker2" class="form-control form-control-lg mb-3" value="<%= @competition.compe_end %>">
+      </div>
+      </div>
+        <label for="title">タイトル</label>
+        <% if @competition.errors.messages[:title].present? %>
+        <span class="text-danger pl-3"><%= @competition.errors.messages[:title].to_s.delete('["]') %></span>
+        <% end %>
+        <input type="text" name="title" id="title" value="<%= @competition.title %>" class="form-control form-control-lg mb-3
+        <% if @competition.errors.messages[:title].present? %>
+        is-invalid
+        <% end %>
+        ">
+        <div class="form-group">
+          <label for="content">内容</label>
+          <textarea class="form-control" name="content" id="contents" rows="20"><%= @competition.content %></textarea>
+        </div>
+        <div class="form-group">
+        <label for="discription">メタディスクリプション</label>
+          <textarea class="form-control" name="disc" id="discription" rows="3"><%= @competition.disc %></textarea>
+        </div>
+        <div class="form-group">
+          <label for="excerpt">抜粋</label>
+          <textarea class="form-control" name="excerpt" id="excerpt" rows="3"><%= @competition.excerpt %></textarea>
+        </div>
+    </div>
+    <div class="col-md-3">
+    <div class="row pb-3">
+    <div class="col-md-6">
+    <button class="btn m-0 bg-info btn-block text-center white-text text-nowrap" type="submit">下書き</button>
+    </div>
+    <div class="col-md-6">
+    <button class="btn m-0 bg-success btn-block text-center white-text" type="submit">投稿</button>
+    </div>
+    </div>
+    
+    <label for="event_id">競技種目</label>
+    <% if @competition.errors.messages[:event_id].present? %>
+      <span class="text-danger pl-3"><%= @competition.errors.messages[:event_id].to_s.delete('["]') %></span>
+    <% end %>
+    <select class="custom-select mb-3
+    <% if @competition.errors.messages[:event_id].present? %>
+    is-invalid
+    <% end %>
+    " name="event_id" size="5">
+    <% e_selected = @competition.event_id %>
+    <% @events.each do |event| %>
+    <option value="<%= event.id %>"
+    <% if e_selected == event.id %>
+        selected
+        <% end %>
+    ><%= event.name %></option>
+    <% end %>
+    </select>
+
+    <label for="pref_id">地域</label>
+    <% if @competition.errors.messages[:pref_id].present? %>
+      <span class="text-danger pl-3"><%= @competition.errors.messages[:pref_id].to_s.delete('["]') %></span>
+    <% end %>
+      <select class="custom-select mb-3
+    <% if @competition.errors.messages[:pref_id].present? %>
+    is-invalid
+    <% end %>
+      " name="pref_id" size="5">
+      <% p_selected = @competition.pref_id %>
+      <% @prefs.each do |pref| %>
+        <option value="<%= pref.id %>"
+        <% if p_selected == pref.id %>
+        selected
+        <% end %>
+        ><%= pref.name %></option>
+        <% end %>
+      </select>
+
+      <label for="generation_id">年代</label>
+      <% if @competition.errors.messages[:generation_id].present? %>
+      <span class="text-danger pl-3"><%= @competition.errors.messages[:generation_id].to_s.delete('["]') %></span>
+      <% end %>
+      <select class="custom-select mb-3
+      <% if @competition.errors.messages[:generation_id].present? %>
+      is-invalid
+      <% end %>
+      " name="generation_id" size="5">
+      <% g_selected = @competition.generation_id %>
+      <% @generations.each do |generation| %>
+        <option value="<%= generation.id %>"
+                <% if g_selected == generation.id %>
+        selected
+        <% end %>
+        ><%= generation.name %></option>
+        <% end %>
+      </select>
+
+      <label class="d-block" for="tags">タグ</label>
+      <div class="border rounded p-2">
+      <% @tags.each do |tag| %>
+      <div class="custom-control custom-checkbox custom-control-inline">
+      <input type="checkbox" name="tag_id[]" class="custom-control-input" id="<%= tag.slug %>" value="<%= tag.id %>"
+
+      >
+      <label class="custom-control-label" for="<%= tag.slug %>">
+      <%= tag.name %>
+      </label>
+      </div>
+      <% end %>
+      </div>
+      </form>
+    </div>
+    </div>
+  </main>
+</div>
+</div>
