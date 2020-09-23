@@ -1,7 +1,15 @@
 # ActiveRecord
 ########################################################
-ActiveRecord::Base.configurations = YAML.load_file('database.yml')
-ActiveRecord::Base.establish_connection(:development)
+# ActiveRecord::Base.configurations = YAML.load_file('database.yml')
+# ActiveRecord::Base.establish_connection(:development)
+ActiveRecord::Base.establish_connection(
+  adapter: "postgresql",
+  database: ENV['DB_NAME2'],
+  host: "",
+  username: ENV['DB_USER'],
+  password: ENV['DB_PASSWORD'],
+  encoding: "utf8"
+)
 
 class Member < ActiveRecord::Base
   has_secure_password
